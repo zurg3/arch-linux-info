@@ -10,6 +10,15 @@ read -p "Enter your username: " set_username
 read -p "Enter root password: " root_password
 read -p "Enter password of your user: " user_password
 
+echo "Do you install Arch Linux on virtual machine?"
+read -p "1 - yes, 0 - no: " vm_setting
+
+if [[ $vm_setting == 0 ]]; then
+  gui_install="xorg-server xorg-drivers xorg-xinit"
+elif [[ $vm_setting == 1 ]]; then
+  gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
+fi
+
 loadkeys ru
 setfont cyr-sun16
 timedatectl set-ntp true
@@ -99,7 +108,7 @@ echo \"[multilib]\" >> /etc/pacman.conf
 echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 
 pacman -Syy
-pacman -S xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils
+pacman -S $gui_install
 pacman -S xfce4 xfce4-goodies lxdm ttf-dejavu
 pacman -S networkmanager network-manager-applet ppp
 systemctl enable lxdm NetworkManager
