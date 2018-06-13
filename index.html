@@ -371,6 +371,14 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <div class="code">
                   <pre># sudo pacman -S git</pre>
                 </div>
+                <p class="commentary">Установить зависимость expac-git</p>
+                <div class="code">
+                  <pre># git clone https://aur.archlinux.org/expac-git.git
+# cd expac-git
+# makepkg -si --noconfirm
+# cd ..
+# rm -rf expac-git</pre>
+                </div>
                 <p class="commentary">Установить <b>aurman</b></p>
                 <div class="code">
                   <pre># git clone https://github.com/polygamma/aurman.git
