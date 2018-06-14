@@ -8,7 +8,7 @@
 
 Example:
 ```
-$ wget https://raw.githubusercontent.com/zurg3/arch-linux-info/master/arch_linux_install.sh
+# wget https://raw.githubusercontent.com/zurg3/arch-linux-info/master/arch_linux_install.sh
 ```
 4. Run the script
 5. Enter the hostname, user name, root password and user password
