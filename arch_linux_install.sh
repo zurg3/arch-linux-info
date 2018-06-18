@@ -20,44 +20,103 @@ elif [[ $vm_setting == 1 ]]; then
   gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
 fi
 
+# DE selection
+echo "Which DE do you want to install?"
+read -p "1 - Xfce, 2 - GNOME: " de_setting
+if [[ $de_setting == 1 ]]; then
+  de_setting="xfce4 xfce4-goodies lxdm ttf-dejavu"
+  dm_setting=lxdm
+elif [[ $de_setting == 2 ]]; then
+  de_setting="gnome gnome-tweak-tool gdm"
+  dm_setting=gdm
+fi
+
 loadkeys ru
 setfont cyr-sun16
 timedatectl set-ntp true
 
-# partition the disks
-(
-  echo o;
+# option to make disk partitions
+echo "Do you want to make disk partitions?"
+read -p "1 - yes, 0 - no: " disk_partition
+if [[ $disk_partition == 1 ]]; then
+  echo "Warning! You need at least 50 GB free space on your disk!"
+  read -p "1 - default partition, 2 - custom partition: " disk_partition_type
+  if [[ $disk_partition_type == 1 ]]; then
+    # partition the disks (default)
+    (
+      echo o;
 
-  echo n;
-  echo;
-  echo;
-  echo;
-  echo +500M;
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo +500M;
 
-  echo n;
-  echo;
-  echo;
-  echo;
-  echo +20G;
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo +20G;
 
-  echo n;
-  echo;
-  echo;
-  echo;
-  echo +2G;
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo +2G;
 
-  echo n;
-  echo p;
-  echo;
-  echo;
+      echo n;
+      echo p;
+      echo;
+      echo;
 
-  echo a;
-  echo 1;
+      echo a;
+      echo 1;
 
-  echo w;
-) | fdisk /dev/sda
+      echo w;
+    ) | fdisk /dev/sda
 
-fdisk -l
+    fdisk -l
+  elif [[ $disk_partition_type == 2 ]]; then
+    read -p "Enter the size of /boot (/dev/sda1): " boot_size
+    read -p "Enter the size of /root (/dev/sda2): " root_size
+    read -p "Enter the size of swap (/dev/sda3): " swap_size
+    
+    # partition the disks (custom)
+    (
+      echo o;
+
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo $boot_size;
+
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo $root_size;
+
+      echo n;
+      echo;
+      echo;
+      echo;
+      echo $swap_size;
+
+      echo n;
+      echo p;
+      echo;
+      echo;
+
+      echo a;
+      echo 1;
+
+      echo w;
+    ) | fdisk /dev/sda
+
+    fdisk -l
+  fi
+fi
 
 # format the partitions
 mkfs.ext2 /dev/sda1 -L boot
@@ -115,9 +174,9 @@ echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 
 pacman -Syy
 pacman -S $gui_install
-pacman -S xfce4 xfce4-goodies lxdm ttf-dejavu
+pacman -S $de_setting
 pacman -S networkmanager network-manager-applet ppp
-systemctl enable lxdm NetworkManager
+systemctl enable $dm_setting NetworkManager
 
 rm $0
 
