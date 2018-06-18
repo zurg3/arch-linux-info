@@ -24,11 +24,11 @@ fi
 echo "Which DE do you want to install?"
 read -p "1 - Xfce, 2 - GNOME: " de_setting
 if [[ $de_setting == 1 ]]; then
-  de_setting="xfce4 xfce4-goodies lxdm ttf-dejavu"
-  dm_setting=lxdm
+  de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
+  dm_install=lxdm
 elif [[ $de_setting == 2 ]]; then
-  de_setting="gnome gnome-tweak-tool gdm"
-  dm_setting=gdm
+  de_install="gnome gnome-tweak-tool gdm"
+  dm_install=gdm
 fi
 
 loadkeys ru
@@ -174,9 +174,9 @@ echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 
 pacman -Syy
 pacman -S $gui_install
-pacman -S $de_setting
+pacman -S $de_install
 pacman -S networkmanager network-manager-applet ppp
-systemctl enable $dm_setting NetworkManager
+systemctl enable $dm_install NetworkManager
 
 rm $0
 
