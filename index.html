@@ -395,27 +395,6 @@ Include = /etc/pacman.d/mirrorlist</pre>
 # cd ..
 # rm -rf aurman</pre>
                 </div>
-<!--
-                <br>
-                <p class="commentary">Добавить репозиторий archlinuxfr. Вписать нижеуказанные строки</p>
-                <div class="code">
-                  <pre># sudo nano /etc/pacman.conf</pre>
-                </div>
-                <div class="code_part">
-                  <pre>[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch</pre>
-                </div>
-                <p class="commentary">Обновить базы данных пакетов</p>
-                <div class="code">
-                  <pre># sudo pacman -Syu</pre>
-                </div>
-                <p class="commentary">Установить <b>yaourt</b></p>
-                <div class="code">
-                  <pre># sudo pacman -Sy yaourt</pre>
-                </div>
-                <p class="commentary">Yaourt рекомендуется запускать от обычного пользователя ($), не от root (#)</p>
-              -->
                 <h3>Установка программ</h3>
                 <div class="code">
                   <pre># sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
@@ -425,7 +404,6 @@ Server = http://repo.archlinux.fr/$arch</pre>
                 </div>
                 <p class="commentary">Установка AUR программ</p>
                 <div class="code">
-                  <!--<pre># yaourt -S <i>имя_пакета1 имя_пакета2 ...</i></pre>-->
                   <pre># aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
                 </div>
                 <div class="code">
@@ -434,7 +412,6 @@ Server = http://repo.archlinux.fr/$arch</pre>
                 <h3>Обновление системы</h3>
                 <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через Yaourt</p>
                 <div class="code_end">
-                  <!--<pre># yaourt -Syua</pre>-->
                   <pre># aurman -Syu</pre>
                 </div>
               </div>
