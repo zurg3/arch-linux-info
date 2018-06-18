@@ -148,6 +148,7 @@ genfstab -pU /mnt >> /mnt/etc/fstab
   echo "echo \"FONT=cyr-sun16\" >> /etc/vconsole.conf";
   echo "mkinitcpio -p linux";
   echo "passwd";
+  echo "pacman -Syy";
   echo "$root_password";
   echo "$root_password";
   echo "pacman -S --noconfirm grub";
