@@ -374,42 +374,42 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <h3>Установка AUR</h3>
                 <p class="commentary">Обновить базы данных пакетов</p>
                 <div class="code">
-                  <pre># sudo pacman -Syy</pre>
+                  <pre>$ sudo pacman -Syy</pre>
                 </div>
                 <p class="commentary">Если в системе не установлен <b>Git</b>, то нужно его установить</p>
                 <div class="code">
-                  <pre># sudo pacman -S git</pre>
+                  <pre>$ sudo pacman -S git</pre>
                 </div>
                 <p class="commentary">Установить зависимость expac-git</p>
                 <div class="code">
-                  <pre># git clone https://aur.archlinux.org/expac-git.git
-# cd expac-git
-# makepkg -si --noconfirm
-# cd ..
-# rm -rf expac-git</pre>
+                  <pre>$ git clone https://aur.archlinux.org/expac-git.git
+$ cd expac-git
+$ makepkg -si --noconfirm
+$ cd ..
+$ rm -rf expac-git</pre>
                 </div>
                 <p class="commentary">Добавить PGP-ключ <b>aurman</b></p>
                 <div class="code">
-                  <pre># gpg --keyserver keys.gnupg.net --recv-keys 465022E743D71E39</pre>
+                  <pre>$ gpg --recv-keys 465022E743D71E39</pre>
                 </div>
                 <p class="commentary">Установить <b>aurman</b></p>
                 <div class="code">
-                  <pre># git clone https://aur.archlinux.org/aurman.git
-# cd aurman
-# makepkg -si
-# cd ..
-# rm -rf aurman</pre>
+                  <pre>$ git clone https://aur.archlinux.org/aurman.git
+$ cd aurman
+$ makepkg -si
+$ cd ..
+$ rm -rf aurman</pre>
                 </div>
                 <h3>Установка программ</h3>
                 <div class="code">
-                  <pre># sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
+                  <pre>$ sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
                 </div>
                 <div class="code">
                   <pre>firefox gimp inkscape libreoffice libreoffice-fresh-ru audacity screenfetch vlc gparted alsa-lib alsa-utils gnome-calculator p7zip unrar pulseaudio</pre>
                 </div>
                 <p class="commentary">Установка AUR программ</p>
                 <div class="code">
-                  <pre># aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
+                  <pre>$ aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
                 </div>
                 <div class="code">
                   <pre>discord</pre>
@@ -417,7 +417,7 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <h3>Обновление системы</h3>
                 <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через Yaourt</p>
                 <div class="code_end">
-                  <pre># aurman -Syu</pre>
+                  <pre>$ aurman -Syu</pre>
                 </div>
               </div>
           </details>
