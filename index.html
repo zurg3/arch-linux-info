@@ -302,6 +302,7 @@ FONT=cyr-sun16</pre>
                 <div class="code">
                   <pre># dhcpcd</pre>
                 </div>
+                <p class="commentary">Или Wi-Fi</p>
                 <div class="code">
                   <pre># wifi-menu</pre>
                 </div>
@@ -319,7 +320,7 @@ FONT=cyr-sun16</pre>
                 </div>
                 <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
                   <pre># Uncomment to allow members of group wheel to execute any command
-  %wheel ALL=(ALL) ALL</pre>
+%wheel ALL=(ALL) ALL</pre>
                 </div>
                 <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки</p>
                 <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
@@ -353,9 +354,13 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <div class="code">
                   <pre># pacman -S networkmanager network-manager-applet ppp</pre>
                 </div>
-                <p class="commentary">Включить автозагрузку менеджера входа и интернет (с соблюдением регистра для NetworkManager)</p>
+                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME)</p>
                 <div class="code">
                   <pre># systemctl enable gdm NetworkManager</pre>
+                </div>
+                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для Xfce)</p>
+                <div class="code">
+                  <pre># systemctl enable lxdm NetworkManager</pre>
                 </div>
                 <p class="commentary">Перезагрузить систему</p>
                 <div class="code_end">
