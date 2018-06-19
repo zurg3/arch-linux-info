@@ -10,13 +10,16 @@ Example:
 ```
 # wget https://raw.githubusercontent.com/zurg3/arch-linux-info/master/arch_linux_install.sh
 ```
+
 4. Run the script
 5. Enter the hostname, user name, root password and user password
 6. Option to install x.org with VirtualBox Guest Utils
-7. Installation process...
-8. Creating the script for the post-installation
-9. Reboot
-10. Connect to the internet via "dhcpcd" command
-11. Run the setting script and Xfce downloading
-12. Reboot
-13. Arch Linux has been installed!
+7. DE selection
+8. Option to make disk partitions
+9. Installation process...
+10. Creating the script for the post-installation
+11. Reboot
+12. Connect to the internet via "dhcpcd" command
+13. Run the setting script and DE downloading
+14. Reboot
+15. Arch Linux has been installed!
