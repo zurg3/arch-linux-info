@@ -22,12 +22,26 @@ fi
 
 # DE selection
 echo "Which DE do you want to install?"
-read -p "1 - Xfce, 2 - GNOME: " de_setting
+echo "1 - Xfce"
+echo "2 - GNOME"
+echo "3 - LXDE"
+echo "4 - Cinnamon"
+echo "5 - MATE"
+read -p "-> " de_setting
 if [[ $de_setting == 1 ]]; then
   de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
   dm_install=lxdm
 elif [[ $de_setting == 2 ]]; then
   de_install="gnome gnome-tweak-tool gdm"
+  dm_install=gdm
+elif [[ $de_setting == 3 ]]; then
+  de_install="lxde ttf-dejavu"
+  dm_install=lxdm
+elif [[ $de_setting == 4 ]]; then
+  de_install="cinnamon gdm"
+  dm_install=gdm
+elif [[ $de_setting == 5 ]]; then
+  de_install="mate mate-extra gdm"
   dm_install=gdm
 fi
 
