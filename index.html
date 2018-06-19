@@ -350,15 +350,28 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <div class="code">
                   <pre># pacman -S xfce4 xfce4-goodies lxdm ttf-dejavu</pre>
                 </div>
+                <p class="commentary"><i>Другие DE</i></p>
+                <p class="commentary">LXDE</p>
+                <div class="code">
+                  <pre># pacman -S lxde ttf-dejavu</pre>
+                </div>
+                <p class="commentary">Cinnamon</p>
+                <div class="code">
+                  <pre># pacman -S cinnamon gdm</pre>
+                </div>
+                <p class="commentary">MATE</p>
+                <div class="code">
+                  <pre># pacman -S mate mate-extra gdm</pre>
+                </div>
                 <p class="commentary">Установить менеджер сети</p>
                 <div class="code">
                   <pre># pacman -S networkmanager network-manager-applet ppp</pre>
                 </div>
-                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME)</p>
+                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME/Cinnamon/MATE)</p>
                 <div class="code">
                   <pre># systemctl enable gdm NetworkManager</pre>
                 </div>
-                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для Xfce)</p>
+                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для Xfce/LXDE)</p>
                 <div class="code">
                   <pre># systemctl enable lxdm NetworkManager</pre>
                 </div>
