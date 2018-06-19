@@ -193,7 +193,7 @@ pacman -S $de_install
 pacman -S networkmanager network-manager-applet ppp
 systemctl enable $dm_install NetworkManager
 
-rm $0
+rm arch_linux_setting.sh
 
 reboot" > /mnt/root/arch_linux_setting.sh
 
