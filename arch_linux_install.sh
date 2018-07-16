@@ -11,15 +11,6 @@ read -p "Enter your username: " set_username
 read -p "Enter root password: " root_password
 read -p "Enter password of your user: " user_password
 
-# option to install VirtualBox Guest Utils
-echo "Do you install Arch Linux on virtual machine?"
-read -p "1 - yes, 0 - no: " vm_setting
-if [[ $vm_setting == 0 ]]; then
-  gui_install="xorg-server xorg-drivers xorg-xinit"
-elif [[ $vm_setting == 1 ]]; then
-  gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
-fi
-
 # DE selection
 echo "Which DE do you want to install?"
 echo "1 - Xfce"
@@ -27,22 +18,34 @@ echo "2 - GNOME"
 echo "3 - LXDE"
 echo "4 - Cinnamon"
 echo "5 - MATE"
+echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
-if [[ $de_setting == 1 ]]; then
-  de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
-  dm_install=lxdm
-elif [[ $de_setting == 2 ]]; then
-  de_install="gnome gnome-tweak-tool gdm"
-  dm_install=gdm
-elif [[ $de_setting == 3 ]]; then
-  de_install="lxde ttf-dejavu"
-  dm_install=lxdm
-elif [[ $de_setting == 4 ]]; then
-  de_install="cinnamon gdm"
-  dm_install=gdm
-elif [[ $de_setting == 5 ]]; then
-  de_install="mate mate-extra gdm"
-  dm_install=gdm
+if [[ $de_setting != 0 ]]; then
+  if [[ $de_setting == 1 ]]; then
+    de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
+    dm_install=lxdm
+  elif [[ $de_setting == 2 ]]; then
+    de_install="gnome gnome-tweak-tool gdm"
+    dm_install=gdm
+  elif [[ $de_setting == 3 ]]; then
+    de_install="lxde ttf-dejavu"
+    dm_install=lxdm
+  elif [[ $de_setting == 4 ]]; then
+    de_install="cinnamon gdm"
+    dm_install=gdm
+  elif [[ $de_setting == 5 ]]; then
+    de_install="mate mate-extra gdm"
+    dm_install=gdm
+  fi
+
+  # option to install VirtualBox Guest Utils
+  echo "Do you install Arch Linux on virtual machine?"
+  read -p "1 - yes, 0 - no: " vm_setting
+  if [[ $vm_setting == 0 ]]; then
+    gui_install="xorg-server xorg-drivers xorg-xinit"
+  elif [[ $vm_setting == 1 ]]; then
+    gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
+  fi
 fi
 
 loadkeys ru
@@ -94,7 +97,7 @@ if [[ $disk_partition == 1 ]]; then
     read -p "Enter the size of /boot (/dev/sda1): " boot_size
     read -p "Enter the size of /root (/dev/sda2): " root_size
     read -p "Enter the size of swap (/dev/sda3): " swap_size
-    
+
     # partition the disks (custom)
     (
       echo o;
@@ -174,6 +177,11 @@ genfstab -pU /mnt >> /mnt/etc/fstab
 # create the script for the post-installation
 echo "#!/bin/bash
 
+terminal_install=$de_setting
+
+dhcpcd
+sleep 10
+
 useradd -m -g users -G wheel -s /bin/bash $set_username
 (
   echo \"$user_password\";
@@ -188,12 +196,15 @@ echo \"[multilib]\" >> /etc/pacman.conf
 echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 
 pacman -Syy
-pacman -S $gui_install
-pacman -S $de_install
-pacman -S networkmanager network-manager-applet ppp
-systemctl enable $dm_install NetworkManager
 
-rm arch_linux_setting.sh
+if [[ \$terminal_install != 0 ]]; then
+  pacman -S $gui_install $de_install networkmanager network-manager-applet ppp
+  systemctl enable $dm_install NetworkManager
+elif [[ \$terminal_install == 0 ]]; then
+  pacman -S virtualbox-guest-utils
+fi
+
+rm \$0
 
 reboot" > /mnt/root/arch_linux_setting.sh
 
