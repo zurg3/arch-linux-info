@@ -396,15 +396,11 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <div class="code">
                   <pre>$ sudo pacman -S git</pre>
                 </div>
-                <p class="commentary">Добавить PGP-ключ <b>aurman</b></p>
-                <div class="code">
-                  <pre>$ gpg --recv-keys 465022E743D71E39</pre>
-                </div>
                 <p class="commentary">Установить <b>aurman</b></p>
                 <div class="code">
                   <pre>$ git clone https://aur.archlinux.org/aurman.git
 $ cd aurman
-$ makepkg -si
+$ makepkg -si --skippgpcheck
 $ cd ..
 $ rm -rf aurman</pre>
                 </div>
