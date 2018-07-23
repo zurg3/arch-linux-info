@@ -56,47 +56,17 @@ if [[ $disk_partition == 1 ]]; then
   echo "Warning! You need at least 50 GB free space on your disk!"
   read -p "1 - default partition, 2 - custom partition: " disk_partition_type
   if [[ $disk_partition_type == 1 ]]; then
-    # partition the disks (default)
-    (
-      echo o;
-
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo +500M;
-
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo +20G;
-
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo +2G;
-
-      echo n;
-      echo p;
-      echo;
-      echo;
-
-      echo a;
-      echo 1;
-
-      echo w;
-    ) | fdisk /dev/sda
-
-    fdisk -l
+    boot_size="+500M"
+    root_size="+20G"
+    swap_size="+2G"
   elif [[ $disk_partition_type == 2 ]]; then
     read -p "Enter the size of /boot (/dev/sda1): " boot_size
     read -p "Enter the size of /root (/dev/sda2): " root_size
     read -p "Enter the size of swap (/dev/sda3): " swap_size
-
-    # partition the disks (custom)
-    (
+  fi
+  
+  # partition the disks
+  (
       echo o;
 
       echo n;
@@ -128,8 +98,9 @@ if [[ $disk_partition == 1 ]]; then
       echo w;
     ) | fdisk /dev/sda
 
+    echo "Your disk partitions"
     fdisk -l
-  fi
+    sleep 15
 fi
 
 # format the partitions
