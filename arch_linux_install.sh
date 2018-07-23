@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# this script is unstable
-# be careful, if you want use it
-
 ### you must execute "dhcpcd" before you run this script!
 
 # hostname, user and passwords settings
