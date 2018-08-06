@@ -13,7 +13,7 @@
 ```
 # wget https://raw.githubusercontent.com/zurg3/arch-linux-info/master/arch_linux_install.sh
 ```
-4. Make the script executable:
+4. Make the script executable
 ```
 # chmod +x arch_linux_install.sh
 ```
