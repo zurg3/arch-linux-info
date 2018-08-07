@@ -35,7 +35,7 @@ if [[ $de_setting != 0 ]]; then
     de_install="mate mate-extra gdm ttf-dejavu"
     dm_install=gdm
   elif [[ $de_setting == 6 ]]; then
-    de_install="i3 lxdm ttf-dejavu"
+    de_install="i3 dmenu termite lxdm ttf-dejavu"
     dm_install=lxdm
   fi
 
