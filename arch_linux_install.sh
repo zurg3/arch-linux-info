@@ -15,6 +15,7 @@ echo "2 - GNOME"
 echo "3 - LXDE"
 echo "4 - Cinnamon"
 echo "5 - MATE"
+echo "6 - i3"
 echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
 if [[ $de_setting != 0 ]]; then
@@ -22,17 +23,20 @@ if [[ $de_setting != 0 ]]; then
     de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
     dm_install=lxdm
   elif [[ $de_setting == 2 ]]; then
-    de_install="gnome gnome-tweak-tool gdm"
+    de_install="gnome gnome-tweak-tool gdm ttf-dejavu"
     dm_install=gdm
   elif [[ $de_setting == 3 ]]; then
     de_install="lxde ttf-dejavu"
     dm_install=lxdm
   elif [[ $de_setting == 4 ]]; then
-    de_install="cinnamon gdm"
+    de_install="cinnamon gdm ttf-dejavu"
     dm_install=gdm
   elif [[ $de_setting == 5 ]]; then
-    de_install="mate mate-extra gdm"
+    de_install="mate mate-extra gdm ttf-dejavu"
     dm_install=gdm
+  elif [[ $de_setting == 6 ]]; then
+    de_install="i3 lxdm ttf-dejavu"
+    dm_install=lxdm
   fi
 
   # option to install VirtualBox Guest Utils
@@ -100,7 +104,7 @@ if [[ $disk_partition == 1 ]]; then
 
     echo "Your disk partitions"
     fdisk -l
-    sleep 15
+    sleep 10
 fi
 
 # format the partitions
