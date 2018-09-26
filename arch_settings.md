@@ -22,4 +22,4 @@
 Выполнить команду `sudo pacman -Sc`
 
 ## Добавить русскую раскладку в Arch Linux i3
-Вписать в файл *~/.i3/config* строку `exec --no-startup-id "setxkbmap -model pc105 -layout us,ru grp:alt_shift_toggle"`
+Вписать в файл *~/.i3/config* строку `exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle"`
