@@ -11,7 +11,7 @@
 2. Connect to the internet via *dhcpcd* command
 3. Download the script via *wget*
 ```
-# wget https://raw.githubusercontent.com/zurg3/arch-linux-info/master/arch_linux_install.sh
+# wget https://zurg3.github.io/arch-linux-info/arch_linux_install.sh
 ```
 4. Make the script executable
 ```
