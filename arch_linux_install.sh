@@ -16,6 +16,7 @@ echo "3 - LXDE"
 echo "4 - Cinnamon"
 echo "5 - MATE"
 echo "6 - i3"
+echo "7 - LXQt"
 echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
 if [[ $de_setting != 0 ]]; then
@@ -37,6 +38,9 @@ if [[ $de_setting != 0 ]]; then
   elif [[ $de_setting == 6 ]]; then
     de_install="i3 dmenu termite compton ttf-font-awesome scrot feh lxappearance lxdm ttf-dejavu"
     dm_install=lxdm
+  elif [[ $de_setting == 7 ]]; then
+    de_install="lxqt lxdm ttf-dejavu"
+    dm_install=lxdm
   fi
 
   # option to install VirtualBox Guest Utils
@@ -46,6 +50,13 @@ if [[ $de_setting != 0 ]]; then
     gui_install="xorg-server xorg-drivers xorg-xinit"
   elif [[ $vm_setting == 1 ]]; then
     gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
+  fi
+elif [[ $de_setting == 0 ]]; then
+  # option to install VirtualBox Guest Utils
+  echo "Do you install Arch Linux on virtual machine?"
+  read -p "1 - yes, 0 - no: " vm_setting
+  if [[ $vm_setting == 1 ]]; then
+    gui_install="virtualbox-guest-utils"
   fi
 fi
 
@@ -173,7 +184,9 @@ if [[ \$terminal_install != 0 ]]; then
   pacman -S $gui_install $de_install networkmanager network-manager-applet ppp
   systemctl enable $dm_install NetworkManager
 elif [[ \$terminal_install == 0 ]]; then
-  pacman -S virtualbox-guest-utils
+  if [[ \$vm_setting == 1 ]]; then
+    pacman -S $gui_install
+  fi
 fi
 
 rm \$0
