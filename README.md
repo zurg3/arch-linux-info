@@ -1,8 +1,8 @@
 # Arch Linux info
 ### Arch Linux stuff:
-* Installation guide (based on the [installation guide from the Official Arch Wiki](https://wiki.archlinux.org/index.php/Installation_guide_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)) and [check list by Alexey Boyko](https://docs.google.com/document/d/1IsTwkhYvYde9y3zTD1EscqockzdtdUYcItnAglYfZdU))
+* Installation guide (based on the [installation guide from the Official Arch Wiki](https://wiki.archlinux.org/index.php/Installation_guide_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)) and [check list by Alexey Boyko](https://docs.google.com/document/d/1IsTwkhYvYde9y3zTD1EscqockzdtdUYcItnAglYfZdU)) (in Russian)
 * Arch Linux installation script
-* Recommended post-installation settings
+* Recommended post-installation settings (in Russian)
 * Aurman installation script
 * Some pictures
 
@@ -27,13 +27,13 @@
 9. Option to make disk partitions
 10. Installation process...
 11. Creating the script for the post-installation
-12. Reboot
+12. Rebooting
 13. Login as root
-14. Run the setting script
+14. Run the post-installation script
 ```
 # ./arch_linux_setting.sh
 ```
-15. Post-installation settings...
+15. Post-installation process...
 16. DE downloading (if needed)...
-17. Reboot
+17. Rebooting
 18. Arch Linux has been installed!
