@@ -37,3 +37,7 @@
 16. DE downloading (if needed)...
 17. Rebooting
 18. Arch Linux has been installed!
+
+### Some notes:
+- If installation script doesn't meet your requirements, you can fork this repository to edit the script to your needs.
+- [Issues](https://github.com/zurg3/arch-linux-info/issues) are welcome. Also you can suggest some ideas there.
