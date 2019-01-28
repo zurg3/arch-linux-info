@@ -234,7 +234,7 @@
                 <div class="code">
                   <pre># ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime</pre>
                 </div>
-                <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8</p>
+                <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8.</p>
                 <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
                   <pre># nano /etc/locale.gen</pre>
                 </div>
@@ -310,7 +310,7 @@ FONT=cyr-sun16</pre>
           <details>
             <summary><b>4. После установки</b></summary>
               <div class="in2">
-                <p class="commentary">Войти в систему. Логин - root, пароль - тот, что установили</p><br>
+                <p class="commentary">Войти в систему. Логин - root, пароль - тот, что установили.</p><br>
                 <p class="commentary">Подключить проводной интернет</p>
                 <div class="code">
                   <pre># dhcpcd</pre>
@@ -319,15 +319,15 @@ FONT=cyr-sun16</pre>
                 <div class="code">
                   <pre># wifi-menu</pre>
                 </div>
-                <p class="commentary">Создать нового пользователя. Вместо MYUSERNAME вписать имя пользователя</p>
+                <p class="commentary">Создать нового пользователя. Вместо MYUSERNAME вписать имя пользователя.</p>
                 <div class="code">
                   <pre># useradd -m -g users -G wheel -s /bin/bash MYUSERNAME</pre>
                 </div>
-                <p class="commentary">Установить пароль для нового пользователя. Вместо MYUSERNAME вписать имя пользователя</p>
+                <p class="commentary">Установить пароль для нового пользователя. Вместо MYUSERNAME вписать имя пользователя.</p>
                 <div class="code">
                   <pre># passwd MYUSERNAME</pre>
                 </div>
-                <p class="commentary">Настроить sudo для нового пользователя. Раскомментировать нижеуказанную строку</p>
+                <p class="commentary">Настроить sudo для нового пользователя. Раскомментировать нижеуказанную строку.</p>
                 <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
                   <pre># nano /etc/sudoers</pre>
                 </div>
@@ -335,7 +335,7 @@ FONT=cyr-sun16</pre>
                   <pre># Uncomment to allow members of group wheel to execute any command
 %wheel ALL=(ALL) ALL</pre>
                 </div>
-                <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки</p>
+                <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки.</p>
                 <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
                   <pre># nano /etc/pacman.conf</pre>
                 </div>
@@ -424,19 +424,13 @@ $ makepkg -si --skippgpcheck
 $ cd ..
 $ rm -rf aurman</pre>
                 </div>
-                <h3>Установка программ</h3>
+                <h3>Установка программ из Pacman</h3>
                 <div class="code">
                   <pre>$ sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
                 </div>
-                <div class="code">
-                  <pre>alsa-lib alsa-utils bash-completion bind-tools enca file-roller firefox firefox-i18n-ru gedit git gnome-calculator gnome-screenshot gnome-system-monitor gparted gstreamer gvfs htop libreoffice-fresh libreoffice-fresh-ru jre10-openjdk mc net-tools p7zip pavucontrol pulseaudio rsync screenfetch transmission-gtk tree unrar vim vlc wget xdg-user-dirs xreader</pre>
-                </div>
-                <p class="commentary">Установка AUR программ</p>
+                <h3>Установка программ из AUR</h3>
                 <div class="code">
                   <pre>$ aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
-                </div>
-                <div class="code">
-                  <pre>bsdmainutils vertex-themes x-arc-shadow xed</pre>
                 </div>
                 <h3>Обновление системы</h3>
                 <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через aurman</p>
