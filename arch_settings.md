@@ -23,3 +23,7 @@
 
 ## Добавить русскую раскладку в Arch Linux i3
 Вписать в файл *~/.i3/config* строку `exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle"`
+
+## Получить список зеркал
+Выполнить команду `curl "https://www.archlinux.org/mirrorlist/?country=RU&protocol=http&ip_version=4" -o mirrorlist`
+Переместить файл *mirrorlist* в каталог */etc/pacman.d*
