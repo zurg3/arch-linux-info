@@ -27,3 +27,6 @@
 ## Получить список зеркал
 Выполнить команду `curl "https://www.archlinux.org/mirrorlist/?country=RU&protocol=http&ip_version=4" -o mirrorlist`
 Переместить файл *mirrorlist* в каталог */etc/pacman.d*
+
+## В системе неправильное время
+Выполнить команду `sudo timedatectl set-ntp true`
