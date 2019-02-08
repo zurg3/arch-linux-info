@@ -29,4 +29,4 @@
 Переместить файл *mirrorlist* в каталог */etc/pacman.d*
 
 ## В системе неправильное время
-Выполнить команду `sudo timedatectl set-ntp true`
+Если после установки в системе неправильное время, нужно выполнить команду `sudo timedatectl set-ntp true`
