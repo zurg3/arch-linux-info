@@ -2,6 +2,10 @@
 
 ### you must execute "dhcpcd" before you run this script!
 
+loadkeys ru
+setfont cyr-sun16
+timedatectl set-ntp true
+
 # hostname, user and passwords settings
 read -p "Enter the hostname: " set_hostname
 read -p "Enter your username: " set_username
@@ -59,10 +63,6 @@ elif [[ $de_setting == 0 ]]; then
     gui_install="virtualbox-guest-utils"
   fi
 fi
-
-loadkeys ru
-setfont cyr-sun16
-timedatectl set-ntp true
 
 # option to make disk partitions
 echo "Do you want to make disk partitions?"
