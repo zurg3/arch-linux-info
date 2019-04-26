@@ -10,7 +10,7 @@
         font-family: 'Noto Sans', sans-serif;
         background: #b6cdf526;
       }
-      
+
       summary:focus {
         outline: none;
       }
@@ -59,15 +59,15 @@
       .commentary {
         font-size: 14px;
       }
-      
+
       .commentary_end {
         font-size: 14px;
       }
-      
+
       a {
         color: #0000c0;
       }
-      
+
       a:visited {
         color: #0000c0;
       }
@@ -436,6 +436,14 @@ $ makepkg -si --skippgpcheck
 $ cd ..
 $ rm -rf aurman</pre>
                 </div>
+                <p class="commentary">Или можно попробовать <b>Simple AUR Helper (SAH)</b></p>
+                <div class="code">
+                  <pre>$ git clone https://github.com/zurg3/sah.git
+$ cd sah
+$ makepkg -si
+$ cd ..
+$ rm -rf sah</pre>
+                </div>
                 <h3>Установка программ из Pacman</h3>
                 <div class="code">
                   <pre>$ sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
@@ -449,13 +457,20 @@ $ rm -rf aurman</pre>
                 <div class="code">
                   <pre>$ aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
                 </div>
+                <p class="commentary">С помощью <b>SAH</b></p>
+                <div class="code">
+                  <pre>$ sah -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
+                </div>
                 <h3>Обновление системы</h3>
-                <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через yay или aurman</p>
+                <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через yay, aurman или SAH</p>
                 <div class="code_end">
                   <pre>$ yay -Syu</pre>
                 </div>
                 <div class="code_end">
                   <pre>$ aurman -Syu</pre>
+                </div>
+                <div class="code_end">
+                  <pre>$ sah -Syu</pre>
                 </div>
               </div>
           </details>
