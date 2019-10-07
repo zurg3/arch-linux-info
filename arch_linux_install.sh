@@ -133,7 +133,7 @@ mount /dev/sda4 /mnt/home
 
 # set the mirror and download the base packages
 echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel
+pacstrap /mnt base base-devel linux linux-firmware nano dhcpcd
 
 # configure the system
 genfstab -pU /mnt >> /mnt/etc/fstab
