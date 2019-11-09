@@ -12,6 +12,19 @@ read -p "Enter your username: " set_username
 read -p "Enter root password: " root_password
 read -p "Enter password of your user: " user_password
 
+# Kernel selection
+echo "Select Kernel version:"
+echo "1 - Latest stable (linux)"
+echo "2 - Long-term support (linux-lts)"
+echo -p "-> " kernel_version
+if [[ $kernel_version == 1 ]]; then
+  kernel_install="linux"
+  mkinitcpio_preset="linux"
+elif [[ $kernel_version == 2 ]]; then
+  kernel_install="linux-lts"
+  mkinitcpio_preset="linux-lts"
+fi
+
 # DE selection
 echo "Which DE do you want to install?"
 echo "1 - Xfce"
@@ -133,7 +146,7 @@ mount /dev/sda4 /mnt/home
 
 # set the mirror and download the base packages
 echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel linux linux-firmware nano dhcpcd
+pacstrap /mnt base base-devel $kernel_install linux-firmware nano dhcpcd
 
 # configure the system
 genfstab -pU /mnt >> /mnt/etc/fstab
@@ -146,7 +159,7 @@ genfstab -pU /mnt >> /mnt/etc/fstab
   echo "echo \"LANG=ru_RU.UTF-8\" > /etc/locale.conf";
   echo "echo \"KEYMAP=ru\" > /etc/vconsole.conf";
   echo "echo \"FONT=cyr-sun16\" >> /etc/vconsole.conf";
-  echo "mkinitcpio -p linux";
+  echo "mkinitcpio -p $mkinitcpio_preset";
   echo "passwd";
   echo "$root_password";
   echo "$root_password";
