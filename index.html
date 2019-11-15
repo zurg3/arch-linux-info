@@ -219,6 +219,7 @@
                   <pre>Server = http://mirror.yandex.ru/archlinux/$repo/os/$arch</pre>
                 </div>
                 <h3>Установка основных пакетов</h3>
+                <p class="commentary">Вместо обычного ядра Linux (<b>linux</b>) можно установить LTS (<b>linux-lts</b>) или Zen ядро(<b>linux-zen</b>)</p>
                 <div class="code">
                   <pre># pacstrap /mnt base base-devel linux linux-firmware nano dhcpcd</pre>
                 </div>
@@ -266,9 +267,18 @@ ru_RU.UTF-8 UTF-8</pre>
                   <pre>KEYMAP=ru
 FONT=cyr-sun16</pre>
                 </div>
-                <p class="commentary">Создать загрузочный RAM диск</p>
+                <p class="commentary">Создать загрузочный RAM диск для установленного ядра</p><br>
+                <p class="commentary">Для обычного</p>
                 <div class="code">
                   <pre># mkinitcpio -p linux</pre>
+                </div>
+                <p class="commentary">Для LTS</p>
+                <div class="code">
+                  <pre># mkinitcpio -p linux-lts</pre>
+                </div>
+                <p class="commentary">Для Zen</p>
+                <div class="code">
+                  <pre># mkinitcpio -p linux-zen</pre>
                 </div>
                 <p class="commentary">Изменить пароль суперпользователя</p>
                 <div class="code">
