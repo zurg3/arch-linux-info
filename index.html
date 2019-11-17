@@ -400,12 +400,20 @@ Include = /etc/pacman.d/mirrorlist</pre>
                 <div class="code">
                   <pre># pacman -S lxqt lxdm ttf-dejavu</pre>
                 </div>
+                <p class="commentary">KDE Plasma</p>
+                <div class="code">
+                  <pre># pacman -S plasma gdm ttf-dejavu</pre>
+                </div>
+                <p class="commentary">Pantheon</p>
+                <div class="code">
+                  <pre># pacman -S pantheon gdm ttf-dejavu</pre>
+                </div>
                 <br>
                 <p class="commentary">Установить менеджер сети</p>
                 <div class="code">
                   <pre># pacman -S networkmanager network-manager-applet ppp</pre>
                 </div>
-                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME/Cinnamon/MATE)</p>
+                <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME/Cinnamon/MATE/KDE Plasma/Pantheon)</p>
                 <div class="code">
                   <pre># systemctl enable gdm NetworkManager</pre>
                 </div>
