@@ -38,6 +38,8 @@ echo "4 - Cinnamon"
 echo "5 - MATE"
 echo "6 - i3"
 echo "7 - LXQt"
+echo "8 - KDE Plasma"
+echo "9 - Pantheon"
 echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
 if [[ $de_setting != 0 ]]; then
@@ -62,6 +64,12 @@ if [[ $de_setting != 0 ]]; then
   elif [[ $de_setting == 7 ]]; then
     de_install="lxqt lxdm ttf-dejavu"
     dm_install=lxdm
+  elif [[ $de_setting == 8 ]]; then
+    de_install="plasma gdm ttf-dejavu"
+    dm_install=gdm
+  elif [[ $de_setting == 9 ]]; then
+    de_install="pantheon gdm ttf-dejavu"
+    dm_install=gdm
   fi
 
   # option to install VirtualBox Guest Utils
