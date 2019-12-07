@@ -17,7 +17,7 @@ echo "Select Kernel version:"
 echo "1 - Latest stable (linux)"
 echo "2 - Long-term support (linux-lts)"
 echo "3 - Linux Zen (linux-zen)"
-echo -p "-> " kernel_version
+read -p "-> " kernel_version
 if [[ $kernel_version == 1 ]]; then
   kernel_install="linux"
   mkinitcpio_preset="linux"
