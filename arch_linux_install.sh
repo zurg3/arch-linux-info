@@ -40,6 +40,7 @@ echo "6 - i3"
 echo "7 - LXQt"
 echo "8 - KDE Plasma"
 echo "9 - Pantheon"
+echo "10 - Budgie"
 echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
 if [[ $de_setting != 0 ]]; then
@@ -69,6 +70,9 @@ if [[ $de_setting != 0 ]]; then
     dm_install=gdm
   elif [[ $de_setting == 9 ]]; then
     de_install="pantheon gdm ttf-dejavu"
+    dm_install=gdm
+  elif [[ $de_setting == 10 ]]; then
+    de_install="budgie-desktop gdm ttf-dejavu"
     dm_install=gdm
   fi
 
@@ -104,7 +108,7 @@ if [[ $disk_partition == 1 ]]; then
     read -p "Enter the size of /root (/dev/sda2): " root_size
     read -p "Enter the size of swap (/dev/sda3): " swap_size
   fi
-  
+
   # partition the disks
   (
       echo o;
