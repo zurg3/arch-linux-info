@@ -60,7 +60,7 @@ if [[ $de_setting != 0 ]]; then
     de_install="mate mate-extra gdm ttf-dejavu"
     dm_install=gdm
   elif [[ $de_setting == 6 ]]; then
-    de_install="i3 dmenu compton termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-dejavu ttf-font-awesome"
+    de_install="i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-dejavu ttf-font-awesome terminus-font"
     dm_install=lxdm
   elif [[ $de_setting == 7 ]]; then
     de_install="lxqt lxdm ttf-dejavu"
