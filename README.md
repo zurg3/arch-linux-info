@@ -1,9 +1,9 @@
 # Arch Linux info
 ### Arch Linux stuff:
-* Installation guide (based on the [installation guide from the Official Arch Wiki](https://wiki.archlinux.org/index.php/Installation_guide_(Русский)) and [check list by Alexey Boyko](https://docs.google.com/document/d/1IsTwkhYvYde9y3zTD1EscqockzdtdUYcItnAglYfZdU)) (in Russian)
+* Installation guide (in Russian)
 * Arch Linux installation script
 * Recommended post-installation settings (in Russian)
-* AUR Helpers (yay, aurman, SAH) installation scripts
+* yay installation script
 * Some pictures
 
 ### Installation script guide/How does this script work?
