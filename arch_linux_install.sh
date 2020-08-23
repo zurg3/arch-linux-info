@@ -45,35 +45,35 @@ echo "0 - Terminal (Don't install any DE)"
 read -p "-> " de_setting
 if [[ $de_setting != 0 ]]; then
   if [[ $de_setting == 1 ]]; then
-    de_install="xfce4 xfce4-goodies lxdm ttf-dejavu"
-    dm_install=lxdm
+    de_install="xfce4 xfce4-goodies lxdm"
+    dm_install="lxdm"
   elif [[ $de_setting == 2 ]]; then
-    de_install="gnome gnome-tweak-tool gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="gnome gnome-tweaks gdm"
+    dm_install="gdm"
   elif [[ $de_setting == 3 ]]; then
-    de_install="lxde ttf-dejavu"
-    dm_install=lxdm
+    de_install="lxde"
+    dm_install="lxdm"
   elif [[ $de_setting == 4 ]]; then
-    de_install="cinnamon gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="cinnamon gdm"
+    dm_install="gdm"
   elif [[ $de_setting == 5 ]]; then
-    de_install="mate mate-extra gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="mate mate-extra gdm"
+    dm_install="gdm"
   elif [[ $de_setting == 6 ]]; then
-    de_install="i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-dejavu ttf-font-awesome terminus-font"
-    dm_install=lxdm
+    de_install="i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font"
+    dm_install="lxdm"
   elif [[ $de_setting == 7 ]]; then
-    de_install="lxqt lxdm ttf-dejavu"
-    dm_install=lxdm
+    de_install="lxqt lxdm"
+    dm_install="lxdm"
   elif [[ $de_setting == 8 ]]; then
-    de_install="plasma gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="plasma gdm"
+    dm_install="gdm"
   elif [[ $de_setting == 9 ]]; then
-    de_install="pantheon gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="pantheon gdm"
+    dm_install="gdm"
   elif [[ $de_setting == 10 ]]; then
-    de_install="budgie-desktop gdm ttf-dejavu"
-    dm_install=gdm
+    de_install="budgie-desktop gdm"
+    dm_install="gdm"
   fi
 
   # option to install VirtualBox Guest Utils
@@ -84,6 +84,9 @@ if [[ $de_setting != 0 ]]; then
   elif [[ $vm_setting == 1 ]]; then
     gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
   fi
+
+  # fonts
+  font_install="ttf-dejavu ttf-liberation"
 elif [[ $de_setting == 0 ]]; then
   # option to install VirtualBox Guest Utils
   echo "Do you install Arch Linux on virtual machine?"
@@ -111,40 +114,40 @@ if [[ $disk_partition == 1 ]]; then
 
   # partition the disks
   (
-      echo o;
+    echo o;
 
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo $boot_size;
+    echo n;
+    echo p;
+    echo 1;
+    echo;
+    echo $boot_size;
 
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo $root_size;
+    echo n;
+    echo p;
+    echo 2;
+    echo;
+    echo $root_size;
 
-      echo n;
-      echo;
-      echo;
-      echo;
-      echo $swap_size;
+    echo n;
+    echo p;
+    echo 3;
+    echo;
+    echo $swap_size;
 
-      echo n;
-      echo p;
-      echo;
-      echo;
+    echo n;
+    echo p;
+    echo;
+    echo;
 
-      echo a;
-      echo 1;
+    echo a;
+    echo 1;
 
-      echo w;
-    ) | fdisk /dev/sda
+    echo w;
+  ) | fdisk /dev/sda
 
-    echo "Your disk partitions"
-    fdisk -l
-    sleep 10
+  echo "Your disk partitions"
+  fdisk -l
+  sleep 10
 fi
 
 # format the partitions
@@ -162,7 +165,7 @@ mount /dev/sda4 /mnt/home
 
 # set the mirror and download the base packages
 echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel $kernel_install linux-firmware nano dhcpcd
+pacstrap /mnt base base-devel $kernel_install linux-firmware nano dhcpcd netctl man-db man-pages
 
 # configure the system
 genfstab -pU /mnt >> /mnt/etc/fstab
@@ -210,7 +213,7 @@ echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 pacman -Syy
 
 if [[ \$terminal_install != 0 ]]; then
-  pacman -S $gui_install $de_install networkmanager network-manager-applet ppp
+  pacman -S $gui_install $de_install $font_install networkmanager network-manager-applet ppp
   systemctl enable $dm_install NetworkManager
 elif [[ \$terminal_install == 0 ]]; then
   if [[ \$vm_setting == 1 ]]; then

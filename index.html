@@ -101,9 +101,20 @@
           <pre># dhcpcd</pre>
         </div>
         <p class="commentary">Или Wi-Fi</p>
+        <p class="commentary">Проверить сетевой интерфейс</p>
         <div class="code">
-          <pre># wifi-menu</pre>
+          <pre># ip link</pre>
         </div>
+        <p class="commentary">Подключиться к Wi-Fi</p>
+        <div class="code">
+          <pre># iwctl</pre>
+        </div>
+        <div class="code">
+          <pre>[iwd]# station <i>device</i> connect <i>SSID</i></pre>
+        </div>
+        <p class="commentary"><i>device</i> - сетевой интерфейс</p>
+        <p class="commentary"><i>SSID</i> - название сети Wi-Fi</p>
+        <p class="commentary">Ввести пароль к сети Wi-Fi (если необходимо)</p>
         <h3>Синхронизация системных часов</h3>
         <div class="code">
           <pre># timedatectl set-ntp true</pre>
@@ -123,32 +134,32 @@
         </div>
         <p class="commentary">Создание раздела <b>/boot</b></p>
         <div class="code">
-          <pre>n - создать новый раздел
-тип раздела (primary (основной) или extented (расширенный)), по умолчанию стоит primary (основной) - нажать <i>enter</i>
-выбор номера диска - нажать <i>enter</i>
+          <pre>создать новый раздел - n
+тип раздела (primary (основной) или extented (расширенный)) - p
+выбор номера диска - 1
 первый сектор раздела - нажать <i>enter</i>
-последний сектор раздела (определяется +объём_памятиM(МБ)/G(ГБ)) - +200M</pre>
+последний сектор раздела (определяется +объём_памятиM(МБ)/G(ГБ)) - +500M</pre>
         </div>
         <p class="commentary">Создание <b>корневого раздела</b></p>
         <div class="code">
-          <pre>n - создать новый раздел
-тип раздела (primary (основной) или extented (расширенный)), по умолчанию стоит primary (основной) - нажать <i>enter</i>
-выбор номера диска - нажать <i>enter</i>
+          <pre>создать новый раздел - n
+тип раздела (primary (основной) или extented (расширенный)) - p
+выбор номера диска - 2
 первый сектор раздела - нажать <i>enter</i>
 последний сектор раздела (определяется +объём_памятиM(МБ)/G(ГБ)) - +20G</pre>
         </div>
         <p class="commentary">Создание <b>раздела подкачки (swap)</b></p>
         <div class="code">
-          <pre>n - создать новый раздел
-тип раздела (primary (основной) или extented (расширенный)), по умолчанию стоит primary (основной) - нажать <i>enter</i>
-выбор номера диска - нажать <i>enter</i>
+          <pre>создать новый раздел - n
+тип раздела (primary (основной) или extented (расширенный)) - p
+выбор номера диска - 3
 первый сектор раздела - нажать <i>enter</i>
 последний сектор раздела (определяется +объём_памятиM(МБ)/G(ГБ)) - +2G</pre>
         </div>
         <p class="commentary">Создание раздела <b>/home</b></p>
         <div class="code">
-          <pre>n - создать новый раздел
-тип раздела (primary (основной) или extented (расширенный)), в этот раз по умолчанию будет extented (расширенный) - p
+          <pre>создать новый раздел - n
+тип раздела (primary (основной) или extented (расширенный)) - p
 первый сектор раздела - нажать <i>enter</i>
 последний сектор раздела - нажать <i>enter</i> (будет выделено всё оставшееся место)</pre>
         </div>
@@ -208,16 +219,16 @@
       <div class="in2">
         <h3>Выбор зеркал</h3>
         <p class="commentary">Настроить зеркала. Поставить зеркало Яндекса выше всех остальных.</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/pacman.d/mirrorlist</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre>Server = http://mirror.yandex.ru/archlinux/$repo/os/$arch</pre>
         </div>
         <h3>Установка основных пакетов</h3>
         <p class="commentary">Вместо обычного ядра Linux (<b>linux</b>) можно установить LTS (<b>linux-lts</b>) или Zen ядро (<b>linux-zen</b>)</p>
         <div class="code">
-          <pre># pacstrap /mnt base base-devel linux linux-firmware nano dhcpcd</pre>
+          <pre># pacstrap /mnt base base-devel linux linux-firmware nano dhcpcd netctl man-db man-pages</pre>
         </div>
         <h3>Настройка системы</h3>
         <p class="commentary">Сгенерировать файл fstab</p>
@@ -229,7 +240,7 @@
           <pre># arch-chroot /mnt</pre>
         </div>
         <p class="commentary">Прописать имя компьютера</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/hostname</pre>
         </div>
         <p class="commentary">Настроить часовой пояс для Московского времени</p>
@@ -237,10 +248,10 @@
           <pre># ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime</pre>
         </div>
         <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8.</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/locale.gen</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre>en_US.UTF-8 UTF-8
 ru_RU.UTF-8 UTF-8</pre>
         </div>
@@ -249,17 +260,17 @@ ru_RU.UTF-8 UTF-8</pre>
           <pre># locale-gen</pre>
         </div>
         <p class="commentary">Указать язык системы</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/locale.conf</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre>LANG=ru_RU.UTF-8</pre>
         </div>
         <p class="commentary">Указать keymap и шрифт</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/vconsole.conf</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre>KEYMAP=ru
 FONT=cyr-sun16</pre>
         </div>
@@ -292,6 +303,10 @@ FONT=cyr-sun16</pre>
         <div class="code">
           <pre># pacman -S os-prober mtools fuse</pre>
         </div>
+        <p class="commentary">Установить программу для Wi-Fi (если необходимо)</p>
+        <div class="code">
+          <pre># pacman -S dialog wpa_supplicant</pre>
+        </div>
         <p class="commentary">Установить загрузчик</p>
         <div class="code">
           <pre># grub-install /dev/sda</pre>
@@ -299,10 +314,6 @@ FONT=cyr-sun16</pre>
         <p class="commentary">Обновить grub.cfg</p>
         <div class="code">
           <pre># grub-mkconfig -o /boot/grub/grub.cfg</pre>
-        </div>
-        <p class="commentary">Установить программу для Wi-Fi</p>
-        <div class="code">
-          <pre># pacman -S dialog wpa_supplicant</pre>
         </div>
         <p class="commentary">Выйти из окружения chroot</p>
         <div class="code">
@@ -340,18 +351,18 @@ FONT=cyr-sun16</pre>
           <pre># passwd MYUSERNAME</pre>
         </div>
         <p class="commentary">Настроить sudo для нового пользователя. Раскомментировать нижеуказанную строку.</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/sudoers</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre># Uncomment to allow members of group wheel to execute any command
 %wheel ALL=(ALL) ALL</pre>
         </div>
         <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки.</p>
-        <div class="code" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code">
           <pre># nano /etc/pacman.conf</pre>
         </div>
-        <div class="code_part" title="CTRL+O - сохранить, CTRL+X - выйти">
+        <div class="code_part">
           <pre>[multilib]
 Include = /etc/pacman.d/mirrorlist</pre>
         </div>
@@ -367,49 +378,53 @@ Include = /etc/pacman.d/mirrorlist</pre>
         <div class="code">
           <pre># pacman -S virtualbox-guest-utils</pre>
         </div>
-        <p class="commentary">Установить GNOME, GNOME Tweak Tool и GDM</p>
+        <p class="commentary">Установить GNOME, GNOME Tweaks и GDM</p>
         <div class="code">
-          <pre># pacman -S gnome gnome-tweak-tool gdm ttf-dejavu</pre>
+          <pre># pacman -S gnome gnome-tweaks gdm</pre>
         </div>
         <p class="commentary">Если хотите Xfce, то нужно установить это</p>
         <div class="code">
-          <pre># pacman -S xfce4 xfce4-goodies lxdm ttf-dejavu</pre>
+          <pre># pacman -S xfce4 xfce4-goodies lxdm</pre>
         </div>
         <br>
         <p class="commentary"><i>Другие DE</i></p>
         <p class="commentary">LXDE</p>
         <div class="code">
-          <pre># pacman -S lxde ttf-dejavu</pre>
+          <pre># pacman -S lxde</pre>
         </div>
         <p class="commentary">Cinnamon</p>
         <div class="code">
-          <pre># pacman -S cinnamon gdm ttf-dejavu</pre>
+          <pre># pacman -S cinnamon gdm</pre>
         </div>
         <p class="commentary">MATE</p>
         <div class="code">
-          <pre># pacman -S mate mate-extra gdm ttf-dejavu</pre>
+          <pre># pacman -S mate mate-extra gdm</pre>
         </div>
         <p class="commentary">i3</p>
         <div class="code">
-          <pre># pacman -S i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-dejavu ttf-font-awesome terminus-font</pre>
+          <pre># pacman -S i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font</pre>
         </div>
         <p class="commentary">LXQt</p>
         <div class="code">
-          <pre># pacman -S lxqt lxdm ttf-dejavu</pre>
+          <pre># pacman -S lxqt lxdm</pre>
         </div>
         <p class="commentary">KDE Plasma</p>
         <div class="code">
-          <pre># pacman -S plasma gdm ttf-dejavu</pre>
+          <pre># pacman -S plasma gdm</pre>
         </div>
         <p class="commentary">Pantheon</p>
         <div class="code">
-          <pre># pacman -S pantheon gdm ttf-dejavu</pre>
+          <pre># pacman -S pantheon gdm</pre>
         </div>
         <p class="commentary">Budgie</p>
         <div class="code">
-          <pre># pacman -S budgie-desktop gdm ttf-dejavu</pre>
+          <pre># pacman -S budgie-desktop gdm</pre>
         </div>
         <br>
+        <p class="commentary">Установить шрифты</p>
+        <div class="code">
+          <pre># pacman -S ttf-dejavu ttf-liberation</pre>
+        </div>
         <p class="commentary">Установить менеджер сети</p>
         <div class="code">
           <pre># pacman -S networkmanager network-manager-applet ppp</pre>
@@ -440,7 +455,7 @@ Include = /etc/pacman.d/mirrorlist</pre>
         <div class="code">
           <pre>$ sudo pacman -S git</pre>
         </div>
-        <p class="commentary">Установить <b>yay</b> (рекомендуется)</p>
+        <p class="commentary">Установить <b>yay</b></p>
         <div class="code">
           <pre>$ git clone https://aur.archlinux.org/yay.git
 $ cd yay
@@ -448,49 +463,18 @@ $ makepkg -sir --skippgpcheck
 $ cd ..
 $ rm -rf yay</pre>
         </div>
-        <p class="commentary">Или <b>aurman</b> (запасной вариант)</p>
-        <div class="code">
-          <pre>$ git clone https://aur.archlinux.org/aurman.git
-$ cd aurman
-$ makepkg -si --skippgpcheck
-$ cd ..
-$ rm -rf aurman</pre>
-        </div>
-        <p class="commentary">Или можно попробовать <b>Simple AUR Helper (SAH) and Pacman wrapper</b></p>
-        <div class="code">
-          <pre>$ git clone https://github.com/zurg3/sah.git
-$ cd sah
-$ makepkg -si
-$ cd ..
-$ rm -rf sah</pre>
-        </div>
         <h3>Установка программ из Pacman</h3>
         <div class="code">
           <pre>$ sudo pacman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
         </div>
         <h3>Установка программ из AUR</h3>
-        <p class="commentary">С помощью <b>yay</b></p>
         <div class="code">
           <pre>$ yay -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
         </div>
-        <p class="commentary">С помощью <b>aurman</b></p>
-        <div class="code">
-          <pre>$ aurman -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
-        </div>
-        <p class="commentary">С помощью <b>SAH</b></p>
-        <div class="code">
-          <pre>$ sah -S <i>имя_пакета1 имя_пакета2 ...</i></pre>
-        </div>
         <h3>Обновление системы</h3>
-        <p class="commentary">Обновление всей системы (самого ядра, окружения рабочего стола, программ из pacman и из AUR) производится одной командой через yay, aurman или SAH</p>
+        <p class="commentary">Обновление всей системы производится одной командой</p>
         <div class="code_end">
           <pre>$ yay -Syu</pre>
-        </div>
-        <div class="code_end">
-          <pre>$ aurman -Syu</pre>
-        </div>
-        <div class="code_end">
-          <pre>$ sah -Syu</pre>
         </div>
         <br>
         <p class="commentary">Рекомендуемые настройки системы: <a href="https://zurg3.github.io/arch-linux-info/arch_settings" target="_blank">https://zurg3.github.io/arch-linux-info/arch_settings</a></p>
