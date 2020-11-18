@@ -164,7 +164,7 @@ swapon /dev/sda3
 mount /dev/sda4 /mnt/home
 
 # set the mirror and download the base packages
-echo "Server = http://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+echo "Server = https://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 pacstrap /mnt base base-devel $kernel_install linux-firmware nano dhcpcd netctl man-db man-pages
 
 # configure the system
