@@ -15,8 +15,11 @@
 ## Возможные проблемы с LibreOffice Base
 Если есть необходимость использования LibreOffice Base, то для корректной работы нужно установить *jre-openjdk*
 
-## Сделать nano редактором по-умолчанию в Git
-Выполнить команду в любом репозитории `git config --global core.editor nano`
+## Настройка Git
+- Указать имя `git config --global user.name "Username"`
+- Указать адрес электронной почты `git config --global user.email "username@example.com"`
+- Сделать *nano* редактором по-умолчанию `git config --global core.editor nano`
+- Настроить *git pull* `git config --global pull.rebase false`
 
 ## Очистка кэша пакетов
 Выполнить команду `sudo pacman -Sc`
