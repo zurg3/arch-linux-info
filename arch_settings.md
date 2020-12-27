@@ -20,6 +20,7 @@
 - Указать адрес электронной почты `git config --global user.email "username@example.com"`
 - Сделать *nano* редактором по-умолчанию `git config --global core.editor nano`
 - Настроить *git pull* `git config --global pull.rebase false`
+- Настроить хранение учётных данных `git config --global credential.helper store`
 
 ## Очистка кэша пакетов
 Выполнить команду `sudo pacman -Sc`
