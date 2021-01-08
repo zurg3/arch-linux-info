@@ -1,0 +1,13 @@
+# Maintainer: zurg3 <zurg3mail@mail.ru>
+pkgname=arch-linux-info-base-pkg
+pkgver=2021.01.08
+pkgrel=1
+pkgdesc="Recommended Arch Linux base packages"
+arch=('any')
+url="https://github.com/zurg3/arch-linux-info"
+license=('GPLv3')
+depends=('alsa-lib' 'alsa-utils' 'bash-completion' 'bind' 'file-roller'
+        'firefox' 'firefox-i18n-ru' 'git' 'gparted' 'gstreamer' 'gvfs' 'htop'
+        'links' 'lsscsi' 'man-db' 'man-pages' 'mc' 'net-tools' 'openssh'
+        'p7zip' 'pavucontrol' 'pulseaudio' 'rsync' 'screenfetch' 'tree' 'unrar'
+        'wget' 'xclip' 'xdg-user-dirs')
