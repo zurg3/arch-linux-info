@@ -1,5 +1,12 @@
 # Рекомендуемые настройки системы
 
+## Установить рекомендуемые базовые пакеты
+1. `git clone https://github.com/zurg3/arch-linux-info.git`
+2. `cd arch-linux-info/base-pkg`
+3. `makepkg -si`
+4. `cd ../..`
+5. `rm -rf arch-linux-info`
+
 ## Включить поддержку несохранения команд в истории
 Вписать в файл *~/.bashrc* строку `HISTCONTROL=ignorespace`
 
