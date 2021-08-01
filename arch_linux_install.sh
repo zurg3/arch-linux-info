@@ -60,7 +60,7 @@ if [[ $de_setting != 0 ]]; then
     de_install="mate mate-extra gdm"
     dm_install="gdm"
   elif [[ $de_setting == 6 ]]; then
-    de_install="i3-wm i3status i3blocks i3lock dmenu picom termite vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font"
+    de_install="i3-wm i3status i3blocks i3lock dmenu picom xfce4-terminal vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font"
     dm_install="lxdm"
   elif [[ $de_setting == 7 ]]; then
     de_install="lxqt lxdm"
