@@ -72,7 +72,7 @@ if [[ $de_setting != 0 ]]; then
     de_install="pantheon gdm"
     dm_install="gdm"
   elif [[ $de_setting == 10 ]]; then
-    de_install="budgie-desktop gdm"
+    de_install="budgie gdm"
     dm_install="gdm"
   fi
 
