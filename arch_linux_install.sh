@@ -1,7 +1,5 @@
 #!/bin/bash
 
-### you must execute "dhcpcd" before you run this script!
-
 loadkeys ru
 setfont cyr-sun16
 timedatectl set-ntp true
@@ -172,6 +170,7 @@ genfstab -pU /mnt >> /mnt/etc/fstab
 (
   echo "echo \"$set_hostname\" > /etc/hostname";
   echo "ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime";
+  echo "hwclock --systohc";
   echo "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";
   echo "echo \"ru_RU.UTF-8 UTF-8\" >> /etc/locale.gen";
   echo "locale-gen";
@@ -194,6 +193,7 @@ echo "#!/bin/bash
 
 terminal_install=$de_setting
 
+systemctl start systemd-resolved.service
 dhcpcd
 sleep 10
 
@@ -219,6 +219,7 @@ elif [[ \$terminal_install == 0 ]]; then
   if [[ \$vm_setting == 1 ]]; then
     pacman -S $gui_install
   fi
+  systemctl enable systemd-resolved.service
 fi
 
 rm \$0
