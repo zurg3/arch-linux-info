@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Установка Arch Linux</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans">
-    <link rel="icon" type="image/x-icon" href="https://archlinux.org/static/favicon.29302f683ff8.ico">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://archlinux.org/static/favicon.29302f683ff8.ico" rel="icon">
     <style>
       body {
         font-family: 'Noto Sans', sans-serif;
@@ -17,40 +17,30 @@
         outline: none;
       }
 
-      .in2 {
+      .chapter {
         margin-left: 30px;
       }
 
-      .code {
-        margin-top: 15px;
+      .code, .code_part, .code_end {
         background-color: #ebf1f5;
         border: 1px solid #bbccdd;
+        height: auto;
         overflow: auto;
         word-break: break-all;
         padding-left: 10px;
-        height: auto;
+      }
+
+      .code, .code_end {
+        margin-top: 15px;
       }
 
       .code_part {
-        margin-top: 0;
+        margin-top: 0px;
         border-top-style: dashed;
-        background-color: #ebf1f5;
-        border: 1px solid #bbccdd;
-        overflow: auto;
-        word-break: break-all;
-        padding-left: 10px;
-        height: auto;
       }
 
       .code_end {
-        margin-top: 15px;
         margin-bottom: 20px;
-        background-color: #ebf1f5;
-        border: 1px solid #bbccdd;
-        overflow: auto;
-        word-break: break-all;
-        padding-left: 10px;
-        height: auto;
       }
 
       .arch_logo {
@@ -58,11 +48,7 @@
         height: auto;
       }
 
-      .commentary {
-        font-size: 14px;
-      }
-
-      .commentary_end {
+      .commentary, .commentary_end {
         font-size: 14px;
       }
 
@@ -80,13 +66,13 @@
     <a href="https://archlinux.org" target="_blank"><img class="arch_logo" src="https://i.imgur.com/ykWSVKK.png"></a>
     <details>
       <summary><b>1. Загрузка</b></summary>
-      <div class="in2">
+      <div class="chapter">
         <p class="commentary">Скачать дистрибутив с официального сайта: <a href="https://archlinux.org/download" target="_blank">https://archlinux.org/download</a></p>
       </div>
     </details>
     <details>
       <summary><b>2. Перед установкой</b></summary>
-      <div class="in2">
+      <div class="chapter">
         <h3>Установка раскладки клавиатуры</h3>
         <p class="commentary">Выбрать русскую раскладку</p>
         <div class="code">
@@ -97,11 +83,9 @@
           <pre># setfont cyr-sun16</pre>
         </div>
         <h3>Соединение с интернетом</h3>
-        <p class="commentary">Подключить проводной интернет</p>
-        <div class="code">
-          <pre># dhcpcd</pre>
-        </div>
-        <p class="commentary">Или Wi-Fi</p>
+        <p class="commentary">Подключение к сети через Ethernet</p>
+        <p class="commentary">В актуальных установочных образах перед установкой системы подключение к сети через Ethernet устанавливается автоматически (если подключен кабель). Ранее требовалось подключаться вручную через <b>dhcpcd</b>.</p>
+        <p class="commentary">Подключение к сети через Wi-Fi</p>
         <p class="commentary">Проверить сетевой интерфейс</p>
         <div class="code">
           <pre># ip link</pre>
@@ -217,7 +201,7 @@
     </details>
     <details>
       <summary><b>3. Установка</b></summary>
-      <div class="in2">
+      <div class="chapter">
         <h3>Выбор зеркал</h3>
         <p class="commentary">Настроить зеркала. Поставить зеркало Яндекса выше всех остальных.</p>
         <div class="code">
@@ -247,6 +231,10 @@
         <p class="commentary">Настроить часовой пояс для Московского времени</p>
         <div class="code">
           <pre># ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime</pre>
+        </div>
+        <p class="commentary">Настроить аппаратные часы</p>
+        <div class="code">
+          <pre># hwclock --systohc</pre>
         </div>
         <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8.</p>
         <div class="code">
@@ -332,9 +320,13 @@ FONT=cyr-sun16</pre>
     </details>
     <details>
       <summary><b>4. После установки</b></summary>
-      <div class="in2">
+      <div class="chapter">
         <p class="commentary">Войти в систему. Логин - root, пароль - тот, что установили.</p>
         <br>
+        <p class="commentary">Запустить службу systemd-resolved для настройки DNS</p>
+        <div class="code">
+          <pre># systemctl start systemd-resolved.service</pre>
+        </div>
         <p class="commentary">Подключить проводной интернет</p>
         <div class="code">
           <pre># dhcpcd</pre>
@@ -446,7 +438,7 @@ Include = /etc/pacman.d/mirrorlist</pre>
     </details>
     <details>
       <summary><b>5. Дополнительные настройки</b></summary>
-      <div class="in2">
+      <div class="chapter">
         <h3>Установка AUR</h3>
         <p class="commentary">Обновить базы данных пакетов</p>
         <div class="code">
