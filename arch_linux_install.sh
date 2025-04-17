@@ -101,9 +101,9 @@ if [[ $disk_partition == 1 ]]; then
   echo "Warning! You need at least 50 GB free space on your disk!"
   read -p "1 - default partition, 2 - custom partition: " disk_partition_type
   if [[ $disk_partition_type == 1 ]]; then
-    boot_size="+500M"
-    root_size="+20G"
-    swap_size="+2G"
+    boot_size="500M"
+    root_size="20G"
+    swap_size="2G"
   elif [[ $disk_partition_type == 2 ]]; then
     read -p "Enter the size of /boot (/dev/sda1): " boot_size
     read -p "Enter the size of /root (/dev/sda2): " root_size
@@ -118,19 +118,19 @@ if [[ $disk_partition == 1 ]]; then
     echo p;
     echo 1;
     echo;
-    echo $boot_size;
+    echo "+$boot_size";
 
     echo n;
     echo p;
     echo 2;
     echo;
-    echo $root_size;
+    echo "+$root_size";
 
     echo n;
     echo p;
     echo 3;
     echo;
-    echo $swap_size;
+    echo "+$swap_size";
 
     echo n;
     echo p;
