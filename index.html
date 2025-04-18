@@ -21,7 +21,7 @@
         margin-left: 30px;
       }
 
-      .code, .code_part, .code_end {
+      .code, .text_file, .code_end {
         background-color: #ebf1f5;
         border: 1px solid #bbccdd;
         height: auto;
@@ -34,8 +34,13 @@
         margin-top: 15px;
       }
 
-      .code_part {
+      .open_file {
+        border-bottom: none;
+      }
+
+      .text_file {
         margin-top: 0px;
+        border-top-style: dashed;
       }
 
       .code_end {
@@ -45,6 +50,10 @@
       .arch_logo {
         width: 60%;
         height: auto;
+      }
+
+      .fdisk {
+        max-width: 100%;
       }
 
       .commentary, .commentary_end {
@@ -203,10 +212,10 @@
       <div class="chapter">
         <h3>Выбор зеркал</h3>
         <p class="commentary">Настроить зеркала. Поставить зеркало Яндекса выше всех остальных.</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/pacman.d/mirrorlist</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre>Server = https://mirror.yandex.ru/archlinux/$repo/os/$arch</pre>
         </div>
         <h3>Установка основных пакетов</h3>
@@ -236,10 +245,10 @@
           <pre># hwclock --systohc</pre>
         </div>
         <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8.</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/locale.gen</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre>en_US.UTF-8 UTF-8
 ru_RU.UTF-8 UTF-8</pre>
         </div>
@@ -248,17 +257,17 @@ ru_RU.UTF-8 UTF-8</pre>
           <pre># locale-gen</pre>
         </div>
         <p class="commentary">Указать язык системы</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/locale.conf</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre>LANG=ru_RU.UTF-8</pre>
         </div>
         <p class="commentary">Указать keymap и шрифт</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/vconsole.conf</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre>KEYMAP=ru
 FONT=cyr-sun16</pre>
         </div>
@@ -343,18 +352,18 @@ FONT=cyr-sun16</pre>
           <pre># passwd MYUSERNAME</pre>
         </div>
         <p class="commentary">Настроить sudo для нового пользователя. Раскомментировать нижеуказанную строку.</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/sudoers</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre># Uncomment to allow members of group wheel to execute any command
 %wheel ALL=(ALL) ALL</pre>
         </div>
         <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки.</p>
-        <div class="code">
+        <div class="code open_file">
           <pre># nano /etc/pacman.conf</pre>
         </div>
-        <div class="code_part">
+        <div class="text_file">
           <pre>[multilib]
 Include = /etc/pacman.d/mirrorlist</pre>
         </div>
