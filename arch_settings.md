@@ -74,5 +74,5 @@ echo 'exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle
 
 ## Получить актуальный список зеркал
 ```
-sudo curl https://archlinux.org/mirrorlist/?country=RU&protocol=https&ip_version=4 -o /etc/pacman.d/mirrorlist
+sudo curl "https://archlinux.org/mirrorlist/?country=RU&protocol=https&ip_version=4" -o /etc/pacman.d/mirrorlist
 ```
