@@ -1,8 +1,8 @@
 # Arch Linux info
 ### Arch Linux stuff
 - Installation guide (in Russian)
-- Arch Linux installation script
 - Recommended post-installation settings (in Russian)
+- Arch Linux installation script
 - PKGBUILD to install recommended Arch Linux base packages
 - yay installation script
 - Some pictures
@@ -21,23 +21,15 @@
 ```
 # ./arch_linux_install.sh
 ```
-5. Enter the hostname, user name, root password and user password
+5. Enter the hostname, username, root password and user password
 6. Kernel selection
-7. DE selection
-8. Option to install Xorg with VirtualBox Guest Utils (if needed)
-9. Option to make disk partitions
-10. Installation process...
-11. Creating the script for the post-installation
+7. DE/WM selection
+8. DM selection
+9. Option to install Xorg with VirtualBox Guest Utils (if needed)
+10. Option to make disk partitions
+11. Installation process...
 12. Rebooting
-13. Login as root
-14. Run the post-installation script
-```
-# ./arch_linux_setting.sh
-```
-15. Post-installation process...
-16. DE downloading (if needed)...
-17. Rebooting
-18. Arch Linux has been installed!
+13. Arch Linux has been installed!
 
 ### Some notes
 - If installation script doesn't meet your requirements, you can fork this repository to edit the script to your needs.
