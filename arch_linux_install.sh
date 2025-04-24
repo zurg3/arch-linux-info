@@ -1,113 +1,159 @@
 #!/bin/bash
 
-loadkeys ru
-setfont cyr-sun16
+# config
+script_name="$(basename $0)"
+chroot_script_path="/mnt/$script_name"
+pacman_mirror='https://mirror.yandex.ru/archlinux/$repo/os/$arch'
+keymap="ru"
+font="cyr-sun16"
+timezone="Europe/Moscow"
+lang="ru_RU.UTF-8"
+locale="en_US.UTF-8 UTF-8\nru_RU.UTF-8 UTF-8"
+
+loadkeys $keymap
+setfont $font
 timedatectl set-ntp true
 
-# hostname, user and passwords settings
-read -p "Enter the hostname: " set_hostname
-read -p "Enter your username: " set_username
-read -p "Enter root password: " root_password
-read -p "Enter password of your user: " user_password
+# hostname, username and passwords settings
+read -p "Hostname: " hostname
+read -p "Username: " username
+read -p "root password: " root_password
+read -p "$username password: " user_password
 
-# Kernel selection
-echo "Select Kernel version:"
-echo "1 - Latest stable (linux)"
-echo "2 - Long-term support (linux-lts)"
-echo "3 - Linux Zen (linux-zen)"
+# kernel selection
+echo "Select kernel version:"
+echo "1 - Stable (linux)"
+echo "2 - LTS (linux-lts)"
+echo "3 - Zen (linux-zen)"
+echo "4 - Hardened (linux-hardened)"
 read -p "-> " kernel_version
-if [[ $kernel_version == 1 ]]; then
-  kernel_install="linux"
-  mkinitcpio_preset="linux"
-elif [[ $kernel_version == 2 ]]; then
-  kernel_install="linux-lts"
-  mkinitcpio_preset="linux-lts"
-elif [[ $kernel_version == 3 ]]; then
-  kernel_install="linux-zen"
-  mkinitcpio_preset="linux-zen"
-fi
+case $kernel_version in
+  1)
+    kernel_install="linux"
+    mkinitcpio_preset=$kernel_install
+    ;;
+  2)
+    kernel_install="linux-lts"
+    mkinitcpio_preset=$kernel_install
+    ;;
+  3)
+    kernel_install="linux-zen"
+    mkinitcpio_preset=$kernel_install
+    ;;
+  4)
+    kernel_install="linux-hardened"
+    mkinitcpio_preset=$kernel_install
+    ;;
+  *)
+    kernel_install="linux"
+    mkinitcpio_preset=$kernel_install
+    ;;
+esac
 
-# DE selection
-echo "Which DE do you want to install?"
+# desktop environment / window manager selection
+echo "Which DE/WM do you want to install?"
 echo "1 - Xfce"
-echo "2 - GNOME"
-echo "3 - LXDE"
-echo "4 - Cinnamon"
+echo "2 - LXDE (GTK 2)"
+echo "3 - LXDE (GTK 3)"
+echo "4 - LXQt"
 echo "5 - MATE"
-echo "6 - i3"
-echo "7 - LXQt"
-echo "8 - KDE Plasma"
+echo "6 - GNOME"
+echo "7 - KDE Plasma"
+echo "8 - Cinnamon"
 echo "9 - Pantheon"
 echo "10 - Budgie"
-echo "0 - Terminal (Don't install any DE)"
+echo "11 - Openbox"
+echo "12 - i3"
+echo "0 - Terminal (Don't install DE/WM)"
 read -p "-> " de_setting
-if [[ $de_setting != 0 ]]; then
-  if [[ $de_setting == 1 ]]; then
-    de_install="xfce4 xfce4-goodies lxdm"
-    dm_install="lxdm"
-  elif [[ $de_setting == 2 ]]; then
-    de_install="gnome gnome-tweaks gdm"
-    dm_install="gdm"
-  elif [[ $de_setting == 3 ]]; then
-    de_install="lxde"
-    dm_install="lxdm"
-  elif [[ $de_setting == 4 ]]; then
-    de_install="cinnamon gdm"
-    dm_install="gdm"
-  elif [[ $de_setting == 5 ]]; then
-    de_install="mate mate-extra gdm"
-    dm_install="gdm"
-  elif [[ $de_setting == 6 ]]; then
-    de_install="i3-wm i3status i3blocks i3lock dmenu picom xfce4-terminal vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font"
-    dm_install="lxdm"
-  elif [[ $de_setting == 7 ]]; then
-    de_install="lxqt lxdm"
-    dm_install="lxdm"
-  elif [[ $de_setting == 8 ]]; then
-    de_install="plasma gdm"
-    dm_install="gdm"
-  elif [[ $de_setting == 9 ]]; then
-    de_install="pantheon gdm"
-    dm_install="gdm"
-  elif [[ $de_setting == 10 ]]; then
-    de_install="budgie gdm"
-    dm_install="gdm"
-  fi
 
-  # option to install VirtualBox Guest Utils
-  echo "Do you install Arch Linux on virtual machine?"
-  read -p "1 - yes, 0 - no: " vm_setting
-  if [[ $vm_setting == 0 ]]; then
+# display manager selection
+case $de_setting in
+  1|2|3|4|5|6|7|8|9|10|11|12)
+    echo "Which DM do you want to install?"
+    echo "1 - LXDM"
+    echo "2 - GDM"
+    echo "3 - LightDM"
+    echo "4 - SDDM"
+    read -p "-> " dm_setting
+
+    # display manager
+    case $dm_setting in
+      1)
+        dm_install="lxdm"
+        dm_service=$dm_install
+        ;;
+      2)
+        dm_install="gdm"
+        dm_service=$dm_install
+        ;;
+      3)
+        dm_install="lightdm lightdm-gtk-greeter"
+        dm_service="lightdm"
+        ;;
+      4)
+        dm_install="sddm"
+        dm_service=$dm_install
+        ;;
+      *)
+        dm_install="lxdm"
+        dm_service=$dm_install
+        ;;
+    esac
+    ;;
+esac
+
+# option to install VirtualBox Guest Utils
+read -p "Do you install Arch Linux in VirtualBox? [y/n] " vm_setting
+
+# desktop environment / window manager
+case $de_setting in
+  1) de_install="xfce4 xfce4-goodies";;
+  2) de_install="lxde";;
+  3) de_install="lxde-gtk3";;
+  4) de_install="lxqt";;
+  5) de_install="mate mate-extra";;
+  6) de_install="gnome gnome-tweaks";;
+  7) de_install="plasma";;
+  8) de_install="cinnamon";;
+  9) de_install="pantheon";;
+  10) de_install="budgie";;
+  11) de_install="openbox obconf-qt";;
+  12) de_install="i3 dmenu picom vim ranger feh cmus mpv scrot lxappearance";;
+esac
+
+# xorg, network, fonts
+case $de_setting in
+  1|2|3|4|5|6|7|8|9|10|11|12)
     gui_install="xorg-server xorg-drivers xorg-xinit"
-  elif [[ $vm_setting == 1 ]]; then
-    gui_install="xorg-server xorg-drivers xorg-xinit virtualbox-guest-utils"
-  fi
-
-  # fonts
-  font_install="ttf-dejavu ttf-liberation"
-elif [[ $de_setting == 0 ]]; then
-  # option to install VirtualBox Guest Utils
-  echo "Do you install Arch Linux on virtual machine?"
-  read -p "1 - yes, 0 - no: " vm_setting
-  if [[ $vm_setting == 1 ]]; then
-    gui_install="virtualbox-guest-utils"
-  fi
-fi
+    if [[ $vm_setting == "y" || $vm_setting == "Y" ]]; then
+      gui_install+=" virtualbox-guest-utils"
+    fi
+    net_install="networkmanager network-manager-applet ppp"
+    terminal_install="xfce4-terminal"
+    font_install="ttf-dejavu ttf-liberation ttf-font-awesome terminus-font"
+    ;;
+  *)
+    if [[ $vm_setting == "y" || $vm_setting == "Y" ]]; then
+      gui_install="virtualbox-guest-utils"
+    fi
+    net_install="networkmanager"
+    ;;
+esac
 
 # option to make disk partitions
-echo "Do you want to make disk partitions?"
-read -p "1 - yes, 0 - no: " disk_partition
-if [[ $disk_partition == 1 ]]; then
+read -p "Do you want to make disk partitions? [y/n] " disk_partition
+if [[ $disk_partition == "y" || $disk_partition == "Y" ]]; then
   echo "Warning! You need at least 50 GB free space on your disk!"
-  read -p "1 - default partition, 2 - custom partition: " disk_partition_type
-  if [[ $disk_partition_type == 1 ]]; then
+  read -p "Use custom partition sizes? [y/n] " custom_disk_partition
+  if [[ $custom_disk_partition == "y" || $disk_partition == "Y" ]]; then
+    read -p "/boot (/dev/sda1) size: " boot_size
+    read -p "/root (/dev/sda2) size: " root_size
+    read -p "swap (/dev/sda3) size: " swap_size
+  else
     boot_size="500M"
     root_size="20G"
     swap_size="2G"
-  elif [[ $disk_partition_type == 2 ]]; then
-    read -p "Enter the size of /boot (/dev/sda1): " boot_size
-    read -p "Enter the size of /root (/dev/sda2): " root_size
-    read -p "Enter the size of swap (/dev/sda3): " swap_size
   fi
 
   # partition the disks
@@ -161,72 +207,46 @@ mount /dev/sda1 /mnt/boot
 swapon /dev/sda3
 mount /dev/sda4 /mnt/home
 
-# set the mirror and download the base packages
-echo "Server = https://mirror.yandex.ru/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+# set the mirror and install essential packages
+echo "Server = $pacman_mirror" > /etc/pacman.d/mirrorlist
 pacstrap -K /mnt base base-devel $kernel_install linux-firmware nano dhcpcd netctl man-db man-pages
 
-# configure the system
+# generate fstab file
 genfstab -pU /mnt >> /mnt/etc/fstab
-(
-  echo "echo \"$set_hostname\" > /etc/hostname";
-  echo "ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime";
-  echo "hwclock --systohc";
-  echo "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";
-  echo "echo \"ru_RU.UTF-8 UTF-8\" >> /etc/locale.gen";
-  echo "locale-gen";
-  echo "echo \"LANG=ru_RU.UTF-8\" > /etc/locale.conf";
-  echo "echo \"KEYMAP=ru\" > /etc/vconsole.conf";
-  echo "echo \"FONT=cyr-sun16\" >> /etc/vconsole.conf";
-  echo "mkinitcpio -p $mkinitcpio_preset";
-  echo "passwd";
-  echo "$root_password";
-  echo "$root_password";
-  echo "pacman -Syy";
-  echo "pacman -S --noconfirm grub";
-  echo "grub-install /dev/sda";
-  echo "grub-mkconfig -o /boot/grub/grub.cfg";
-  echo "exit";
-) | arch-chroot /mnt
 
-# create the script for the post-installation
+# create the script for arch-chroot
 echo "#!/bin/bash
 
-terminal_install=$de_setting
-
-systemctl start systemd-resolved.service
-dhcpcd
-sleep 10
-
-useradd -m -g users -G wheel -s /bin/bash $set_username
+echo \"$hostname\" > /etc/hostname
+ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
+hwclock --systohc
+echo -e \"$locale\" > /etc/locale.gen
+locale-gen
+echo \"LANG=$lang\" > /etc/locale.conf
+echo -e \"KEYMAP=$keymap\nFONT=$font\" > /etc/vconsole.conf
+mkinitcpio -p $mkinitcpio_preset
+(
+  echo \"$root_password\";
+  echo \"$root_password\";
+) | passwd
+useradd -m -g users -G wheel -s /bin/bash $username
 (
   echo \"$user_password\";
   echo \"$user_password\";
-) | passwd $set_username
-
-echo \"\" >> /etc/sudoers
-echo \"%wheel ALL=(ALL) ALL\" >> /etc/sudoers
-
-echo \"\" >> /etc/pacman.conf
-echo \"[multilib]\" >> /etc/pacman.conf
-echo \"Include = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
-
+) | passwd $username
+echo -e \"\n%wheel ALL=(ALL) ALL\" >> /etc/sudoers
+echo -e \"\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\" >> /etc/pacman.conf
 pacman -Syy
+pacman -S grub $gui_install $de_install $dm_install $terminal_install $font_install $net_install
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+systemctl enable $dm_service NetworkManager" > $chroot_script_path
 
-if [[ \$terminal_install != 0 ]]; then
-  pacman -S $gui_install $de_install $font_install networkmanager network-manager-applet ppp
-  systemctl enable $dm_install NetworkManager
-elif [[ \$terminal_install == 0 ]]; then
-  if [[ \$vm_setting == 1 ]]; then
-    pacman -S $gui_install
-  fi
-  systemctl enable systemd-resolved.service
-fi
+chmod +x $chroot_script_path
 
-rm \$0
+arch-chroot /mnt ./$script_name
 
-reboot" > /mnt/root/arch_linux_setting.sh
-
-chmod +x /mnt/root/arch_linux_setting.sh
+rm $chroot_script_path
 
 umount -R /mnt
 reboot
