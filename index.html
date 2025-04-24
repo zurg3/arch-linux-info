@@ -219,7 +219,7 @@
           <pre>Server = https://mirror.yandex.ru/archlinux/$repo/os/$arch</pre>
         </div>
         <h3>Установка основных пакетов</h3>
-        <p class="commentary">Вместо обычного ядра Linux (<b>linux</b>) можно установить LTS (<b>linux-lts</b>) или Zen ядро (<b>linux-zen</b>)</p>
+        <p class="commentary">Вместо обычного ядра Linux (<b>linux</b>) можно установить LTS (<b>linux-lts</b>), Zen (<b>linux-zen</b>) или Hardened ядро (<b>linux-hardened</b>)</p>
         <div class="code">
           <pre># pacstrap -K /mnt base base-devel linux linux-firmware nano dhcpcd netctl man-db man-pages</pre>
         </div>
@@ -232,9 +232,9 @@
         <div class="code">
           <pre># arch-chroot /mnt</pre>
         </div>
-        <p class="commentary">Прописать имя компьютера</p>
+        <p class="commentary">Настроить сеть. Вместо MYHOSTNAME вписать имя хоста.</p>
         <div class="code">
-          <pre># nano /etc/hostname</pre>
+          <pre># echo "MYHOSTNAME" > /etc/hostname</pre>
         </div>
         <p class="commentary">Настроить часовой пояс для Московского времени</p>
         <div class="code">
@@ -252,7 +252,7 @@
           <pre>en_US.UTF-8 UTF-8
 ru_RU.UTF-8 UTF-8</pre>
         </div>
-        <p class="commentary">Сгенерировать локаль</p>
+        <p class="commentary">Сгенерировать локали</p>
         <div class="code">
           <pre># locale-gen</pre>
         </div>
@@ -263,7 +263,7 @@ ru_RU.UTF-8 UTF-8</pre>
         <div class="text_file">
           <pre>LANG=ru_RU.UTF-8</pre>
         </div>
-        <p class="commentary">Указать keymap и шрифт</p>
+        <p class="commentary">Указать раскладку клавиатуры и шрифт</p>
         <div class="code open_file">
           <pre># nano /etc/vconsole.conf</pre>
         </div>
@@ -284,64 +284,13 @@ FONT=cyr-sun16</pre>
         <div class="code">
           <pre># mkinitcpio -p linux-zen</pre>
         </div>
+        <p class="commentary">Для Hardened</p>
+        <div class="code">
+          <pre># mkinitcpio -p linux-hardened</pre>
+        </div>
         <p class="commentary">Изменить пароль суперпользователя</p>
         <div class="code">
           <pre># passwd</pre>
-        </div>
-        <p class="commentary">Обновить базы данных пакетов</p>
-        <div class="code">
-          <pre># pacman -Syy</pre>
-        </div>
-        <p class="commentary">Установить GRUB</p>
-        <div class="code">
-          <pre># pacman -S grub</pre>
-        </div>
-        <p class="commentary">Если будет несколько ОС, то нужно установить нижеуказанные пакеты</p>
-        <div class="code">
-          <pre># pacman -S os-prober mtools fuse3</pre>
-        </div>
-        <p class="commentary">Установить программу для Wi-Fi (если необходимо)</p>
-        <div class="code">
-          <pre># pacman -S dialog wpa_supplicant</pre>
-        </div>
-        <p class="commentary">Установить загрузчик</p>
-        <div class="code">
-          <pre># grub-install /dev/sda</pre>
-        </div>
-        <p class="commentary">Обновить grub.cfg</p>
-        <div class="code">
-          <pre># grub-mkconfig -o /boot/grub/grub.cfg</pre>
-        </div>
-        <p class="commentary">Выйти из окружения chroot</p>
-        <div class="code">
-          <pre># exit</pre>
-        </div>
-        <p class="commentary">Размонтировать все разделы</p>
-        <div class="code">
-          <pre># umount -R /mnt</pre>
-        </div>
-        <p class="commentary">Перезагрузить систему</p>
-        <div class="code_end">
-          <pre># reboot</pre>
-        </div>
-      </div>
-    </details>
-    <details>
-      <summary><b>4. После установки</b></summary>
-      <div class="chapter">
-        <p class="commentary">Войти в систему. Логин - root, пароль - тот, что установили.</p>
-        <br>
-        <p class="commentary">Запустить службу systemd-resolved для настройки DNS</p>
-        <div class="code">
-          <pre># systemctl start systemd-resolved.service</pre>
-        </div>
-        <p class="commentary">Подключить проводной интернет</p>
-        <div class="code">
-          <pre># dhcpcd</pre>
-        </div>
-        <p class="commentary">Или Wi-Fi</p>
-        <div class="code">
-          <pre># wifi-menu</pre>
         </div>
         <p class="commentary">Создать нового пользователя. Вместо MYUSERNAME вписать имя пользователя.</p>
         <div class="code">
@@ -359,7 +308,7 @@ FONT=cyr-sun16</pre>
           <pre># Uncomment to allow members of group wheel to execute any command
 %wheel ALL=(ALL) ALL</pre>
         </div>
-        <p class="commentary">Добавить репозиторий multilib (только для x86_64). Раскомментировать нижеуказанные строки.</p>
+        <p class="commentary">Добавить репозиторий multilib. Раскомментировать нижеуказанные строки.</p>
         <div class="code open_file">
           <pre># nano /etc/pacman.conf</pre>
         </div>
@@ -371,72 +320,140 @@ Include = /etc/pacman.d/mirrorlist</pre>
         <div class="code">
           <pre># pacman -Syy</pre>
         </div>
+        <p class="commentary">Установить GRUB</p>
+        <div class="code">
+          <pre># pacman -S grub</pre>
+        </div>
+        <p class="commentary">Если будет несколько ОС, то нужно установить нижеуказанные пакеты</p>
+        <div class="code">
+          <pre># pacman -S os-prober mtools fuse3</pre>
+        </div>
+        <p class="commentary">Установить программу для Wi-Fi (если необходимо)</p>
+        <div class="code">
+          <pre># pacman -S dialog wpa_supplicant</pre>
+        </div>
         <p class="commentary">Установить иксы и драйвера</p>
         <div class="code">
           <pre># pacman -S xorg-server xorg-drivers xorg-xinit</pre>
         </div>
-        <p class="commentary">Установить гостевые дополнения VirtualBox для корректной работы системы на виртуальной машине (если устанавливаете на виртуальную машину)</p>
+        <p class="commentary">Установить гостевые дополнения VirtualBox для корректной работы системы на виртуальной машине (если устанавливаете в VirtualBox)</p>
         <div class="code">
           <pre># pacman -S virtualbox-guest-utils</pre>
         </div>
-        <p class="commentary">Установить GNOME, GNOME Tweaks и GDM</p>
+        <p class="commentary">Установить среду рабочего стола Xfce</p>
         <div class="code">
-          <pre># pacman -S gnome gnome-tweaks gdm</pre>
-        </div>
-        <p class="commentary">Если хотите Xfce, то нужно установить это</p>
-        <div class="code">
-          <pre># pacman -S xfce4 xfce4-goodies lxdm</pre>
+          <pre># pacman -S xfce4 xfce4-goodies</pre>
         </div>
         <br>
-        <p class="commentary"><i>Другие DE</i></p>
-        <p class="commentary">LXDE</p>
+        <p class="commentary"><i>Другие DE/WM</i></p>
+        <p class="commentary">LXDE (GTK 2)</p>
         <div class="code">
           <pre># pacman -S lxde</pre>
         </div>
-        <p class="commentary">Cinnamon</p>
+        <p class="commentary">LXDE (GTK 3)</p>
         <div class="code">
-          <pre># pacman -S cinnamon gdm</pre>
-        </div>
-        <p class="commentary">MATE</p>
-        <div class="code">
-          <pre># pacman -S mate mate-extra gdm</pre>
-        </div>
-        <p class="commentary">i3</p>
-        <div class="code">
-          <pre># pacman -S i3-wm i3status i3blocks i3lock dmenu picom xfce4-terminal vim ranger feh cmus mpv scrot lxdm lxappearance ttf-font-awesome terminus-font</pre>
+          <pre># pacman -S lxde-gtk3</pre>
         </div>
         <p class="commentary">LXQt</p>
         <div class="code">
-          <pre># pacman -S lxqt lxdm</pre>
+          <pre># pacman -S lxqt</pre>
+        </div>
+        <p class="commentary">MATE</p>
+        <div class="code">
+          <pre># pacman -S mate mate-extra</pre>
+        </div>
+        <p class="commentary">GNOME</p>
+        <div class="code">
+          <pre># pacman -S gnome gnome-tweaks</pre>
         </div>
         <p class="commentary">KDE Plasma</p>
         <div class="code">
-          <pre># pacman -S plasma gdm</pre>
+          <pre># pacman -S plasma</pre>
+        </div>
+        <p class="commentary">Cinnamon</p>
+        <div class="code">
+          <pre># pacman -S cinnamon</pre>
         </div>
         <p class="commentary">Pantheon</p>
         <div class="code">
-          <pre># pacman -S pantheon gdm</pre>
+          <pre># pacman -S pantheon</pre>
         </div>
         <p class="commentary">Budgie</p>
         <div class="code">
-          <pre># pacman -S budgie gdm</pre>
+          <pre># pacman -S budgie</pre>
+        </div>
+        <p class="commentary">Openbox</p>
+        <div class="code">
+          <pre># pacman -S openbox obconf-qt</pre>
+        </div>
+        <p class="commentary">i3</p>
+        <div class="code">
+          <pre># pacman -S i3 dmenu picom vim ranger feh cmus mpv scrot lxappearance</pre>
         </div>
         <br>
+        <p class="commentary">Установить менеджер входа LXDM</p>
+        <div class="code">
+          <pre># pacman -S lxdm</pre>
+        </div>
+        <br>
+        <p class="commentary"><i>Другие DM</i></p>
+        <p class="commentary">GDM</p>
+        <div class="code">
+          <pre># pacman -S gdm</pre>
+        </div>
+        <p class="commentary">LightDM</p>
+        <div class="code">
+          <pre># pacman -S lightdm lightdm-gtk-greeter</pre>
+        </div>
+        <p class="commentary">SDDM</p>
+        <div class="code">
+          <pre># pacman -S sddm</pre>
+        </div>
+        <br>
+        <p class="commentary">Установить эмулятор терминала</p>
+        <div class="code">
+          <pre># pacman -S xfce4-terminal</pre>
+        </div>
         <p class="commentary">Установить шрифты</p>
         <div class="code">
-          <pre># pacman -S ttf-dejavu ttf-liberation</pre>
+          <pre># pacman -S ttf-dejavu ttf-liberation ttf-font-awesome terminus-font</pre>
         </div>
         <p class="commentary">Установить менеджер сети</p>
         <div class="code">
           <pre># pacman -S networkmanager network-manager-applet ppp</pre>
         </div>
-        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GNOME/Cinnamon/MATE/KDE Plasma/Pantheon/Budgie)</p>
+        <p class="commentary">Установить загрузчик</p>
+        <div class="code">
+          <pre># grub-install /dev/sda</pre>
+        </div>
+        <p class="commentary">Обновить grub.cfg</p>
+        <div class="code">
+          <pre># grub-mkconfig -o /boot/grub/grub.cfg</pre>
+        </div>
+        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для LXDM)</p>
+        <div class="code">
+          <pre># systemctl enable lxdm NetworkManager</pre>
+        </div>
+        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для GDM)</p>
         <div class="code">
           <pre># systemctl enable gdm NetworkManager</pre>
         </div>
-        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для Xfce/LXDE/i3/LXQt)</p>
+        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для LightDM)</p>
         <div class="code">
-          <pre># systemctl enable lxdm NetworkManager</pre>
+          <pre># systemctl enable lightdm NetworkManager</pre>
+        </div>
+        <p class="commentary">Включить автозагрузку менеджера входа и интернет (для SDDM)</p>
+        <div class="code">
+          <pre># systemctl enable sddm NetworkManager</pre>
+        </div>
+        <h3>Перезагрузка</h3>
+        <p class="commentary">Выйти из окружения chroot</p>
+        <div class="code">
+          <pre># exit</pre>
+        </div>
+        <p class="commentary">Размонтировать все разделы</p>
+        <div class="code">
+          <pre># umount -R /mnt</pre>
         </div>
         <p class="commentary">Перезагрузить систему</p>
         <div class="code_end">
@@ -445,7 +462,7 @@ Include = /etc/pacman.d/mirrorlist</pre>
       </div>
     </details>
     <details>
-      <summary><b>5. Дополнительные настройки</b></summary>
+      <summary><b>4. Дополнительные настройки</b></summary>
       <div class="chapter">
         <h3>Установка AUR</h3>
         <p class="commentary">Обновить базы данных пакетов</p>

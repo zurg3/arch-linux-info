@@ -25,7 +25,6 @@ echo "HISTCONTROL=ignorespace" >> ~/.bashrc
 
 ## Создать стандартные папки в домашнем каталоге
 ```
-sudo pacman -Syy
 sudo pacman -S xdg-user-dirs
 xdg-user-dirs-update
 ```
@@ -74,5 +73,5 @@ echo 'exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle
 
 ## Получить актуальный список зеркал
 ```
-sudo curl "https://archlinux.org/mirrorlist/?country=RU&protocol=https&ip_version=4" -o /etc/pacman.d/mirrorlist
+sudo wget "https://archlinux.org/mirrorlist/?country=RU&protocol=https&ip_version=4" -O /etc/pacman.d/mirrorlist
 ```

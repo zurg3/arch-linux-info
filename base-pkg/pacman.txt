@@ -1,5 +1,6 @@
 alsa-lib
 alsa-utils
+archlinux-wallpaper
 bash-completion
 bind
 file-roller
@@ -18,6 +19,7 @@ mc
 net-tools
 openssh
 p7zip
+papirus-icon-theme
 pavucontrol
 pulseaudio
 rsync
