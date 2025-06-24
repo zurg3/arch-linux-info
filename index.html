@@ -220,6 +220,7 @@
         </div>
         <h3>Установка основных пакетов</h3>
         <p class="commentary">Вместо обычного ядра Linux (<b>linux</b>) можно установить LTS (<b>linux-lts</b>), Zen (<b>linux-zen</b>) или Hardened ядро (<b>linux-hardened</b>)</p>
+        <p class="commentary">Можно пропустить установку пакета <b>linux-firmware</b>, если установка системы происходит в контейнере или виртуальной машине</p>
         <div class="code">
           <pre># pacstrap -K /mnt base base-devel linux linux-firmware nano dhcpcd netctl man-db man-pages</pre>
         </div>

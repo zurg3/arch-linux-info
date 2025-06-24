@@ -106,6 +106,11 @@ esac
 # option to install VirtualBox Guest Utils
 read -p "Do you install Arch Linux in VirtualBox? [y/n] " vm_setting
 
+# firmware
+if [[ $vm_setting != "y" && $vm_setting != "Y" ]]; then
+  firmware_install="linux-firmware"
+fi
+
 # desktop environment / window manager
 case $de_setting in
   1) de_install="xfce4 xfce4-goodies";;
@@ -209,7 +214,7 @@ mount /dev/sda4 /mnt/home
 
 # set the mirror and install essential packages
 echo "Server = $pacman_mirror" > /etc/pacman.d/mirrorlist
-pacstrap -K /mnt base base-devel $kernel_install linux-firmware nano dhcpcd netctl man-db man-pages
+pacstrap -K /mnt base base-devel $kernel_install $firmware_install nano dhcpcd netctl man-db man-pages
 
 # generate fstab file
 genfstab -pU /mnt >> /mnt/etc/fstab
