@@ -474,6 +474,10 @@ Include = /etc/pacman.d/mirrorlist</pre>
         <div class="code">
           <pre>$ sudo pacman -S git</pre>
         </div>
+        <p class="commentary">Отключить сборку debug-пакетов</p>
+        <div class="code">
+          <pre>$ echo 'OPTIONS+=(!debug)' > ~/.makepkg.conf</pre>
+        </div>
         <p class="commentary">Установить <b>yay</b></p>
         <div class="code">
           <pre>$ git clone https://aur.archlinux.org/yay.git
