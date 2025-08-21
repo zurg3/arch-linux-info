@@ -1,3 +1,4 @@
+7zip
 alsa-lib
 alsa-utils
 archlinux-wallpaper
@@ -18,7 +19,6 @@ man-pages
 mc
 net-tools
 openssh
-p7zip
 papirus-icon-theme
 pavucontrol
 pulseaudio
