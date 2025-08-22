@@ -55,9 +55,20 @@ $ git config --global pull.rebase false
 $ git config --global credential.helper store
 ```
 
+## Проверка настроек Git
+Вывести все глобальные настройки
+```
+$ git config --list --global
+```
+
+Вывести все локальные настройки
+```
+$ git config --list --local
+```
+
 ## Очистка кэша пакетов
 ```
-$ sudo pacman -Sc
+$ sudo pacman -Scc
 ```
 
 ## Возможные проблемы с LibreOffice Base
