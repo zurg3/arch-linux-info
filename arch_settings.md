@@ -71,6 +71,11 @@ $ git config --list --local
 $ sudo pacman -Scc
 ```
 
+## Удаление неиспользуемых пакетов
+```
+$ sudo pacman -Rs $(pacman -Qdtq)
+```
+
 ## Возможные проблемы с LibreOffice Base
 Если есть необходимость использования LibreOffice Base, то для корректной работы нужно установить *jre-openjdk*
 
