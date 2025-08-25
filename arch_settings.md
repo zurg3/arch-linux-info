@@ -14,7 +14,7 @@ $ sudo timedatectl set-ntp true
 $ sudo pacman -Syy
 $ sudo pacman -S wget
 $ wget zurg3.github.io/arch-linux-info/base-pkg/pacman.txt
-$ sudo pacman -S --needed $(xargs -a pacman.txt)
+$ sudo pacman -S --needed - < pacman.txt
 $ rm pacman.txt
 ```
 
@@ -73,7 +73,7 @@ $ sudo pacman -Scc
 
 ## Удаление неиспользуемых пакетов
 ```
-$ sudo pacman -Rs $(pacman -Qdtq)
+$ sudo pacman -Rsn $(pacman -Qdtq)
 ```
 
 ## Возможные проблемы с LibreOffice Base
