@@ -4,7 +4,7 @@
 - Recommended post-installation settings (in Russian)
 - Arch Linux installation script
 - yay installation script
-- Arch Linux wallpaper and icon
+- Arch Linux logo and wallpaper
 
 ### Installation script guide/How does this script work?
 1. Run the ISO image
