@@ -1,14 +1,5 @@
 # Рекомендуемые настройки системы
 
-## В системе неправильное время
-Если после установки в системе неправильное время, нужно выполнить команду:
-```
-$ sudo timedatectl set-ntp true
-```
-
-## Включить подсветку синтаксиса в nano
-В файле */etc/nanorc* раскомментировать строку `include "/usr/share/nano/*.nanorc"`
-
 ## Установить рекомендуемые базовые пакеты
 ```
 $ sudo pacman -Syy
@@ -18,9 +9,12 @@ $ sudo pacman -S --needed - < pacman.txt
 $ rm pacman.txt
 ```
 
-## Включить поддержку несохранения команд в истории
+## Включить подсветку синтаксиса в nano
+В файле */etc/nanorc* раскомментировать строку `include "/usr/share/nano/*.nanorc"`
+
+## Настроить сохранение истории команд bash
 ```
-$ echo "HISTCONTROL=ignorespace" >> ~/.bashrc
+$ echo "HISTCONTROL=ignoreboth" >> ~/.bashrc
 ```
 
 ## Создать стандартные папки в домашнем каталоге
@@ -79,18 +73,13 @@ $ sudo pacman -Rsn $(pacman -Qdtq)
 ## Возможные проблемы с LibreOffice Base
 Если есть необходимость использования LibreOffice Base, то для корректной работы нужно установить *jre-openjdk*
 
-## Перекодировать текст в UTF-8
+## Перекодировать текст в кодировку UTF-8
 ```
 $ sudo pacman -S enca
 $ enca -x UTF-8 [file]
 ```
 
-## Добавить русскую раскладку в Arch Linux i3
+## Добавить русскую раскладку клавиатуры в Arch Linux i3
 ```
 $ echo 'exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_shift_toggle"' >> ~/.config/i3/config
-```
-
-## Получить актуальный список зеркал
-```
-$ sudo wget "https://archlinux.org/mirrorlist/?country=RU&protocol=https&ip_version=4" -O /etc/pacman.d/mirrorlist
 ```
