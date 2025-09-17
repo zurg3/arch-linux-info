@@ -3,9 +3,8 @@
 - Installation guide (in Russian)
 - Recommended post-installation settings (in Russian)
 - Arch Linux installation script
-- PKGBUILD to install recommended Arch Linux base packages
 - yay installation script
-- Some pictures
+- Arch Linux wallpaper and icon
 
 ### Installation script guide/How does this script work?
 1. Run the ISO image
