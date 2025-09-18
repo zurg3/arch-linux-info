@@ -4,7 +4,7 @@
 ```
 $ sudo pacman -Syy
 $ sudo pacman -S wget
-$ wget zurg3.github.io/arch-linux-info/base-pkg/pacman.txt
+$ wget zurg3.github.io/arch-linux-info/pacman.txt
 $ sudo pacman -S --needed - < pacman.txt
 $ rm pacman.txt
 ```
