@@ -4,7 +4,7 @@
 - [Recommended post-installation settings](settings.md) (in Russian)
 - [Arch Linux installation script](install_arch_linux.sh)
 - [yay installation script](install_yay.sh)
-- Lists of recommended packages
+- Lists of recommended base packages
   - [pacman.txt](pacman.txt) (official)
   - [aur.txt](aur.txt) (AUR)
 - Arch Linux logo and wallpaper
