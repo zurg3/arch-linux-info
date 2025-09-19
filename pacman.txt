@@ -14,8 +14,6 @@ gvfs
 htop
 links
 lsscsi
-man-db
-man-pages
 mc
 net-tools
 openssh
