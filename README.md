@@ -1,12 +1,12 @@
 # Arch Linux info
 ### Arch Linux stuff
-- Installation guide (in Russian)
-- Recommended post-installation settings (in Russian)
-- Arch Linux installation script
-- yay installation script
+- [Installation guide](https://zurg3.github.io/arch-linux-info/) (in Russian)
+- [Recommended post-installation settings](settings.md) (in Russian)
+- [Arch Linux installation script](install_arch_linux.sh)
+- [yay installation script](install_yay.sh)
 - Lists of recommended packages
-  - pacman.txt (official)
-  - aur.txt (AUR)
+  - [pacman.txt](pacman.txt) (official)
+  - [aur.txt](aur.txt) (AUR)
 - Arch Linux logo and wallpaper
 
 ### Installation script guide
