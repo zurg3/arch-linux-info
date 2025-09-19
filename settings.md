@@ -2,7 +2,6 @@
 
 ## Установить рекомендуемые базовые пакеты
 ```
-$ sudo pacman -Syy
 $ sudo pacman -S wget
 $ wget zurg3.github.io/arch-linux-info/pacman.txt
 $ sudo pacman -S --needed - < pacman.txt
@@ -68,6 +67,11 @@ $ sudo pacman -Scc
 ## Удаление неиспользуемых пакетов
 ```
 $ sudo pacman -Rsn $(pacman -Qdtq)
+```
+
+## Проверка на наличие ошибок запуска служб systemd
+```
+$ systemctl --failed
 ```
 
 ## Возможные проблемы с LibreOffice Base
