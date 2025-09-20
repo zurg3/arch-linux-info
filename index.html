@@ -81,6 +81,7 @@
     <details>
       <summary><b>2. Перед установкой</b></summary>
       <div class="chapter">
+        <p class="commentary"><b>Внимание:</b> данное руководство по установке предназначено для систем с <b>BIOS/MBR</b>!</p>
         <h3>Установка раскладки клавиатуры</h3>
         <p class="commentary">Выбрать русскую раскладку</p>
         <div class="code">
@@ -109,11 +110,13 @@
         <p class="commentary"><i>SSID</i> - название сети Wi-Fi</p>
         <p class="commentary">Ввести пароль к сети Wi-Fi (если необходимо)</p>
         <h3>Синхронизация системных часов</h3>
+        <p class="commentary">В live-окружении установочного образа синхронизация времени выполняется автоматически после подключения интернета</p>
+        <p class="commentary">Проверить статус синхронизации</p>
         <div class="code">
-          <pre># timedatectl set-ntp true</pre>
+          <pre># timedatectl</pre>
         </div>
-        <h3>Разбиение дисков на разделы</h3>
-        <p class="commentary">Посмотреть какие диски есть</p>
+        <h3>Разметка диска</h3>
+        <p class="commentary">Проверить доступные диски</p>
         <div class="code">
           <pre># fdisk -l</pre>
         </div>
@@ -121,7 +124,7 @@
         <div class="code">
           <pre># fdisk /dev/sda</pre>
         </div>
-        <p class="commentary">Создать MBR таблицу</p>
+        <p class="commentary">Создать MBR-таблицу</p>
         <div class="code">
           <pre>o</pre>
         </div>
@@ -227,7 +230,7 @@
         <h3>Настройка системы</h3>
         <p class="commentary">Сгенерировать файл fstab</p>
         <div class="code">
-          <pre># genfstab -pU /mnt >> /mnt/etc/fstab</pre>
+          <pre># genfstab -U /mnt >> /mnt/etc/fstab</pre>
         </div>
         <p class="commentary">Перейти к корневому каталогу новой системы</p>
         <div class="code">
@@ -244,6 +247,10 @@
         <p class="commentary">Настроить аппаратные часы</p>
         <div class="code">
           <pre># hwclock --systohc</pre>
+        </div>
+        <p class="commentary">Включить синхронизацию времени с NTP-сервером</p>
+        <div class="code">
+          <pre># timedatectl set-ntp true</pre>
         </div>
         <p class="commentary">Настроить локаль. Раскомментировать строки en_US.UTF-8 и ru_RU.UTF-8.</p>
         <div class="code open_file">
@@ -272,22 +279,9 @@ ru_RU.UTF-8 UTF-8</pre>
           <pre>KEYMAP=ru
 FONT=cyr-sun16</pre>
         </div>
-        <p class="commentary">Создать загрузочный RAM диск для установленного ядра</p>
-        <p class="commentary">Для обычного</p>
+        <p class="commentary">Создать образ initramfs</p>
         <div class="code">
-          <pre># mkinitcpio -p linux</pre>
-        </div>
-        <p class="commentary">Для LTS</p>
-        <div class="code">
-          <pre># mkinitcpio -p linux-lts</pre>
-        </div>
-        <p class="commentary">Для Zen</p>
-        <div class="code">
-          <pre># mkinitcpio -p linux-zen</pre>
-        </div>
-        <p class="commentary">Для Hardened</p>
-        <div class="code">
-          <pre># mkinitcpio -p linux-hardened</pre>
+          <pre># mkinitcpio -P</pre>
         </div>
         <p class="commentary">Изменить пароль суперпользователя</p>
         <div class="code">
@@ -512,6 +506,6 @@ $ rm -rf yay</pre>
       </div>
     </details>
     <hr>
-    <p class="commentary_end" align="center"><i>Эта инструкция по установке Arch Linux сделана на основе <a href="https://wiki.archlinux.org/title/Installation_guide_(Русский)" target="_blank">инструкции по установке из ArchWiki</a> и <a href="https://docs.google.com/document/d/1IsTwkhYvYde9y3zTD1EscqockzdtdUYcItnAglYfZdU/view" target="_blank">чек листа по установке и настройке Arch Linux Xfce от Алексея Бойко</a></i></p>
+    <p class="commentary_end" align="center"><i>Это руководство по установке Arch Linux сделано на основе <a href="https://wiki.archlinux.org/title/Installation_guide_(Русский)" target="_blank">руководства по установке из ArchWiki</a> и <a href="https://docs.google.com/document/d/1IsTwkhYvYde9y3zTD1EscqockzdtdUYcItnAglYfZdU/view" target="_blank">чек листа по установке и настройке Arch Linux Xfce от Алексея Бойко</a></i></p>
   </body>
 </html>

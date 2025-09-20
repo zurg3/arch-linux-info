@@ -12,13 +12,14 @@ locale="en_US.UTF-8 UTF-8\nru_RU.UTF-8 UTF-8"
 
 loadkeys $keymap
 setfont $font
-timedatectl set-ntp true
 
 # hostname, username and passwords settings
 read -p "Hostname: " hostname
 read -p "Username: " username
-read -p "root password: " root_password
-read -p "$username password: " user_password
+read -sp "root password: " root_password
+echo
+read -sp "$username password: " user_password
+echo
 
 # kernel selection
 echo "Select kernel version:"
@@ -28,26 +29,11 @@ echo "3 - Zen (linux-zen)"
 echo "4 - Hardened (linux-hardened)"
 read -p "-> " kernel_version
 case $kernel_version in
-  1)
-    kernel_install="linux"
-    mkinitcpio_preset=$kernel_install
-    ;;
-  2)
-    kernel_install="linux-lts"
-    mkinitcpio_preset=$kernel_install
-    ;;
-  3)
-    kernel_install="linux-zen"
-    mkinitcpio_preset=$kernel_install
-    ;;
-  4)
-    kernel_install="linux-hardened"
-    mkinitcpio_preset=$kernel_install
-    ;;
-  *)
-    kernel_install="linux"
-    mkinitcpio_preset=$kernel_install
-    ;;
+  1) kernel_install="linux";;
+  2) kernel_install="linux-lts";;
+  3) kernel_install="linux-zen";;
+  4) kernel_install="linux-hardened";;
+  *) kernel_install="linux";;
 esac
 
 # desktop environment / window manager selection
@@ -217,7 +203,7 @@ echo "Server = $pacman_mirror" > /etc/pacman.d/mirrorlist
 pacstrap -K /mnt base base-devel $kernel_install $firmware_install nano dhcpcd netctl man-db man-pages
 
 # generate fstab file
-genfstab -pU /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 # create the script for arch-chroot
 echo "#!/bin/bash
@@ -225,11 +211,12 @@ echo "#!/bin/bash
 echo \"$hostname\" > /etc/hostname
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
+timedatectl set-ntp true
 echo -e \"$locale\" > /etc/locale.gen
 locale-gen
 echo \"LANG=$lang\" > /etc/locale.conf
 echo -e \"KEYMAP=$keymap\nFONT=$font\" > /etc/vconsole.conf
-mkinitcpio -p $mkinitcpio_preset
+mkinitcpio -P
 (
   echo \"$root_password\";
   echo \"$root_password\";
