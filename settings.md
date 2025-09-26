@@ -59,12 +59,26 @@ $ git config --list --global
 $ git config --list --local
 ```
 
-## Очистка кэша пакетов
+## Оптимизация скачивания пакетов через pacman
+В файле */etc/pacman.conf* установить следующие настройки
+```
+[options]
+ParallelDownloads = 3
+DisableDownloadTimeout
+```
+
+## Полезные команды pacman
+Вывести пакеты, для которых доступны обновления
+```
+$ pacman -Qu
+```
+
+Очистка кэша пакетов
 ```
 $ sudo pacman -Scc
 ```
 
-## Удаление неиспользуемых пакетов
+Удаление неиспользуемых пакетов
 ```
 $ sudo pacman -Rsn $(pacman -Qdtq)
 ```
