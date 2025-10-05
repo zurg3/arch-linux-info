@@ -43,6 +43,11 @@ $ git config --global core.editor nano
 $ git config --global pull.rebase false
 ```
 
+Настроить автоматическое удаление несуществующих remote-веток
+```
+$ git config --global fetch.prune true
+```
+
 Настроить хранение учётных данных
 ```
 $ git config --global credential.helper store
