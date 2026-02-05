@@ -39,23 +39,22 @@ esac
 # desktop environment / window manager selection
 echo "Which DE/WM do you want to install?"
 echo "1 - Xfce"
-echo "2 - LXDE (GTK 2)"
-echo "3 - LXDE (GTK 3)"
-echo "4 - LXQt"
-echo "5 - MATE"
-echo "6 - GNOME"
-echo "7 - KDE Plasma"
-echo "8 - Cinnamon"
-echo "9 - Pantheon"
-echo "10 - Budgie"
-echo "11 - Openbox"
-echo "12 - i3"
+echo "2 - LXDE"
+echo "3 - LXQt"
+echo "4 - MATE"
+echo "5 - GNOME"
+echo "6 - KDE Plasma"
+echo "7 - Cinnamon"
+echo "8 - Pantheon"
+echo "9 - Budgie"
+echo "10 - Openbox"
+echo "11 - i3"
 echo "0 - Terminal (Don't install DE/WM)"
 read -p "-> " de_setting
 
 # display manager selection
 case $de_setting in
-  1|2|3|4|5|6|7|8|9|10|11|12)
+  1|2|3|4|5|6|7|8|9|10|11)
     echo "Which DM do you want to install?"
     echo "1 - LXDM"
     echo "2 - GDM"
@@ -101,21 +100,20 @@ fi
 case $de_setting in
   1) de_install="xfce4 xfce4-goodies";;
   2) de_install="lxde";;
-  3) de_install="lxde-gtk3";;
-  4) de_install="lxqt";;
-  5) de_install="mate mate-extra";;
-  6) de_install="gnome gnome-tweaks";;
-  7) de_install="plasma";;
-  8) de_install="cinnamon";;
-  9) de_install="pantheon";;
-  10) de_install="budgie";;
-  11) de_install="openbox obconf-qt";;
-  12) de_install="i3 dmenu picom vim ranger feh cmus mpv scrot lxappearance";;
+  3) de_install="lxqt";;
+  4) de_install="mate mate-extra";;
+  5) de_install="gnome gnome-tweaks";;
+  6) de_install="plasma";;
+  7) de_install="cinnamon";;
+  8) de_install="pantheon";;
+  9) de_install="budgie";;
+  10) de_install="openbox obconf-qt";;
+  11) de_install="i3 dmenu picom vim ranger feh cmus mpv scrot lxappearance";;
 esac
 
 # xorg, network, fonts
 case $de_setting in
-  1|2|3|4|5|6|7|8|9|10|11|12)
+  1|2|3|4|5|6|7|8|9|10|11)
     gui_install="xorg-server xorg-drivers xorg-xinit"
     if [[ $vm_setting == "y" || $vm_setting == "Y" ]]; then
       gui_install+=" virtualbox-guest-utils"
