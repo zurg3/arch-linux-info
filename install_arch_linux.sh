@@ -209,7 +209,6 @@ echo "#!/bin/bash
 echo \"$hostname\" > /etc/hostname
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
-timedatectl set-ntp true
 echo -e \"$locale\" > /etc/locale.gen
 locale-gen
 echo \"LANG=$lang\" > /etc/locale.conf

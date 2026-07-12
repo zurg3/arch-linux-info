@@ -8,6 +8,11 @@ $ sudo pacman -S --needed - < pacman.txt
 $ rm pacman.txt
 ```
 
+## Включить синхронизацию времени с NTP-сервером
+```
+$ sudo timedatectl set-ntp true
+```
+
 ## Включить подсветку синтаксиса в nano
 В файле */etc/nanorc* раскомментировать строку `include "/usr/share/nano/*.nanorc"`
 
